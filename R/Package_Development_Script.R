@@ -17,7 +17,6 @@ usethis::use_news_md(open = interactive())
 # Import functions
 usethis::use_roxygen_md()
 usethis::use_pipe()
-pckg_list <- c("tidyverse","reshape2","dplyr","RPostgres")
 usethis::use_package( "tidyverse", type = "Import")
 usethis::use_package( "reshape2", type = "Import")
 
