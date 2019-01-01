@@ -9,13 +9,17 @@ library(testthat)
 #tmp <- file.path("FILEPATH", "TestContR")
 #create_package(tmp)
 
+# Package Documentation
 usethis::use_mit_license("Alfredo G Marquez")
 usethis::use_readme_rmd()
-use_news_md(open = interactive())
+usethis::use_news_md(open = interactive())
 
+# Import functions
+usethis::use_roxygen_md()
+usethis::use_pipe()
 pckg_list <- c("tidyverse","reshape2","dplyr","RPostgres")
-use_package( "tidyverse", type = "Import")
-use_package( "reshape2", type = "Import")
+usethis::use_package( "tidyverse", type = "Import")
+usethis::use_package( "reshape2", type = "Import")
 
 # After adding roxygen2 params to function in R folder
 devtools::document()
