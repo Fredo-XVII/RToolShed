@@ -5,7 +5,7 @@
 RToolShed ![](https://travis-ci.org/Fredo-XVII/RToolShed.svg?branch=master)
 ===========================================================================
 
-The goal of RToolShed is to ...
+The goal of RToolShed is to simplify and centralize re-usable R code. There are times as a data analyst or a data scientist that we find ourselves writing the same code over and over across projects. The central idea of the R Tool Shed package is to centralize the code to improve development and to standardize the functionality of the functions across projects. The idea of the RToolShed Not much different than how a carpenter stores his tools in a tool shed and pulls them out as needed depending on the project requirements. Here the carpenters are data analyst and data scientist.
 
 Installation
 ------------
@@ -19,29 +19,10 @@ install.packages("RToolShed")
 Example
 -------
 
+I will display just a few of the functions in the package below, for more in-depth resource, please read over the vignettes.
+
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
 ## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
