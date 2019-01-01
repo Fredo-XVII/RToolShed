@@ -1,0 +1,17 @@
+Package: RToolShed
+Type: Package
+Title: R Tool Shed
+Version: 0.1.0
+Author: Alfredo G Marquez
+Maintainer: Alfredo G Marquez <alfredo.g.marquez@gmail.com>
+Description: There are times as a data analyst or a data scientist that we find ourselves writing
+    the same code over and over across projects.  The central idea of the R Tool Shed package is
+    to centralize the code to improve development and to standardize the functionality of the 
+    functions across projects.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
