@@ -9,9 +9,10 @@ library(testthat)
 #tmp <- file.path("FILEPATH", "TestContR")
 #create_package(tmp)
 
-usethis::use_git_hook()
-
 usethis::use_mit_license("Alfredo G Marquez")
+usethis::use_readme_rmd()
+use_news_md(open = interactive())
+
 pckg_list <- c("tidyverse","reshape2","dplyr","RPostgres")
 use_package( "tidyverse", type = "Import")
 use_package( "reshape2", type = "Import")
@@ -21,5 +22,6 @@ devtools::document()
 
 usethis::use_tidy_versions()
 usethis::use_vignette("to_postgres") #
-usethis::use_readme_rmd()
+
+usethis::use_namespace()
 use_testthat()
