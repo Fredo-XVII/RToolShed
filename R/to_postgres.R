@@ -1,19 +1,29 @@
 #' Push R Dataframes to Postgres
+#' @details #' require(RPostgres)
+#' require(stringr)
+#' require(dbplyr)
 
-require(RPostgres)
-require(stringr)
-require(dbplyr)
-
-## package parameters:
-#df <- brck_mrtr_dim  #1 input table
-#pg_conn <- db_postgres #2 pg conn
-#table_name <- "sister_app_logs" #3 name of new table
-#schema_name <- "landing" #4 name of final schema if not public
-#orderby <- "NA" #"co_loc_ref_I"
-#primary_keys <- "NA" # paste("co_loc_i", "co_loc_ref_i", sep = ",")#5 list of primary keys
-
-# Example:
-# to_postgres(df = brck_mrtr_dim, pg_conn = db_XXX, table_name = "brck_mrtr_dim", schema_name = "prod", orderby = "co_loc_ref_i", primary_keys = "co_loc_i,co_loc_ref_i")
+#' # package parameters:
+#' df <- brck_mrtr_dim  #1 input table
+#' pg_conn <- db_postgres #2 pg conn
+#' table_name <- "sister_app_logs" #3 name of new table
+#' schema_name <- "landing" #4 name of final schema if not public
+#' orderby <- "NA" #"co_loc_ref_I"
+#' primary_keys <- "NA" # paste("co_loc_i", "co_loc_ref_i", sep = ",")#5 list of primary keys
+#'
+#' # package parameters:
+#' @param df Dataframe that will be pushed to Postgres
+#' @param pg_conn Connection String
+#' @param table_name Name of new table in Postgres
+#' @param schema_name Name of final schema if not public, default is public
+#' @param orderby Fields to order by
+#' @param primary_keys list of primary keys
+#'
+#' @examples
+#' ## NOT RUN ##
+#' to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod", orderby = "group", primary_keys = "group,date")
+#' @importFrom rlang .data
+#' @export
 
 to_postgres <- function(df,pg_conn,table_name,schema_name,orderby = "NA", primary_keys = "NA") {
   # Input Table

@@ -2,4 +2,4 @@
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\Package_Development_Script.R$
+^\R\\Package_Development_Script.R
