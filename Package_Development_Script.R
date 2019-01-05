@@ -1,5 +1,11 @@
 # Package Development Script
 
+# Some useful keyboard shortcuts for package authoring:
+#
+#   Build and Reload Package:  'Ctrl + Shift + B'
+#   Check Package:             'Ctrl + Shift + E'
+#   Test Package:              'Ctrl + Shift + T'
+
 library(usethis)
 library(devtools)
 library(roxygen2)

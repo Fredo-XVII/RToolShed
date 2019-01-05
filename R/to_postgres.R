@@ -1,4 +1,5 @@
-#' Push R Dataframes to Postgres
+#' Push R Dataframes to Postgres schemas other than Public.
+#'
 #' @details #' require(RPostgres)
 #' require(stringr)
 #' require(dbplyr)
@@ -21,7 +22,8 @@
 #'
 #' @examples
 #' ## NOT RUN ##
-#' to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod", orderby = "group", primary_keys = "group,date")
+#' ## to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod", orderby = "group", primary_keys = "group,date") ##
+#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 
@@ -34,7 +36,7 @@ to_postgres <- function(df,pg_conn,table_name,schema_name,orderby = "NA", primar
   public_table <- paste0("public.",table_name)
 
   # Drop table public.* table if it exist, applies to both sections below
-  RPostgres::dbRemoveTable(conn = con, public_table, fail_if_missing = FALSE )
+  RPostgres::dbRemoveTable(conn = pg_conn, public_table, fail_if_missing = FALSE )
 
   # New Post_gres table
 
@@ -45,8 +47,8 @@ to_postgres <- function(df,pg_conn,table_name,schema_name,orderby = "NA", primar
     if(primary_keys == "NA") { warning("Primary Keys Not Used") }
     else {
       keys_create_tbl <-  dbplyr::build_sql(
-        "ALTER TABLE ", sql(public_table),
-        " ADD CONSTRAINT ", sql(paste0(table_name,"_keys"))," PRIMARY KEY (",sql(primary_keys),");
+        "ALTER TABLE ", dplyr::sql(public_table),
+        " ADD CONSTRAINT ", dplyr::sql(paste0(table_name,"_keys"))," PRIMARY KEY (",dplyr::sql(primary_keys),");
         ")
       RPostgres::dbSendQuery(pg_conn, keys_create_tbl)
     }
@@ -59,15 +61,15 @@ to_postgres <- function(df,pg_conn,table_name,schema_name,orderby = "NA", primar
     new_table <- paste0(schema_name,'.',table_name)
 
     # Drop Old Table
-    drop_new_tbl <- dbplyr::build_sql("DROP TABLE IF EXISTS ", sql(new_table))
-    RPostgres::dbSendQuery(con, drop_new_tbl)
+    drop_new_tbl <- dbplyr::build_sql("DROP TABLE IF EXISTS ", dplyr::sql(new_table))
+    RPostgres::dbSendQuery(pg_conn, drop_new_tbl)
 
     # Build New Table
     create_pg_tbl <- dbplyr::build_sql("
-                                       CREATE TABLE IF NOT EXISTS ", sql(new_table), " AS
+                                       CREATE TABLE IF NOT EXISTS ", dplyr::sql(new_table), " AS
                                        SELECT *
-                                       FROM ", sql(public_table), "
-                                       ORDER BY ", sql(orderby), "
+                                       FROM ", dplyr::sql(public_table), "
+                                       ORDER BY ", dplyr::sql(orderby), "
                                        ")
 
     create_pg_tbl2 <-
@@ -80,8 +82,8 @@ to_postgres <- function(df,pg_conn,table_name,schema_name,orderby = "NA", primar
     if(primary_keys == "NA") { warning("Primary Keys Not Set") }
     else {
       keys_create_tbl <-  dbplyr::build_sql(
-        "ALTER TABLE ", sql(new_table),
-        " ADD CONSTRAINT ", sql(paste0(table_name,"_keys"))," PRIMARY KEY (",sql(primary_keys),");
+        "ALTER TABLE ", dplyr::sql(new_table),
+        " ADD CONSTRAINT ", dplyr::sql(paste0(table_name,"_keys"))," PRIMARY KEY (",dplyr::sql(primary_keys),");
         ")
       RPostgres::dbSendQuery(pg_conn, keys_create_tbl)
     }

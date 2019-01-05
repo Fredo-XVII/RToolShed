@@ -1,4 +1,4 @@
-library(testthat)
-library(RToolShed)
+#library(testthat)
+#library(RToolShed)
 
-test_check("RToolShed")
+#test_check("RToolShed")
