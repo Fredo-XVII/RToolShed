@@ -17,6 +17,7 @@ library(purrr)
 #create_package(tmp)
 
 # Package Documentation
+usethis::use_travis()
 usethis::use_mit_license("Alfredo G Marquez")
 usethis::use_readme_rmd()
 usethis::use_news_md(open = interactive())
