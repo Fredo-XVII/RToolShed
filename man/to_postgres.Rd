@@ -2,7 +2,7 @@
 % Please edit documentation in R/to_postgres.R
 \name{to_postgres}
 \alias{to_postgres}
-\title{Push R Dataframes to Postgres shemas other than Public.}
+\title{Push R Dataframes to Postgres schemas other than Public.}
 \usage{
 to_postgres(df, pg_conn, table_name, schema_name, orderby = "NA",
   primary_keys = "NA")
@@ -21,7 +21,7 @@ to_postgres(df, pg_conn, table_name, schema_name, orderby = "NA",
 \item{primary_keys}{list of primary keys}
 }
 \description{
-Push R Dataframes to Postgres shemas other than Public.
+Push R Dataframes to Postgres schemas other than Public.
 }
 \details{
 #' require(RPostgres)
