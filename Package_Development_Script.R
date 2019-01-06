@@ -33,6 +33,7 @@ devtools::document()
 
 usethis::use_tidy_versions()
 usethis::use_vignette("to_postgres") #
+usethis::use_vignette("rm_db_name") #
 
 usethis::use_namespace()
 usethis::use_testthat()

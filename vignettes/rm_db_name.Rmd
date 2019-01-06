@@ -1,0 +1,49 @@
+---
+title: "rm_db_name"
+author: "Alfredo G Marquez"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{rm_db_name}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `rm_db_name()` function was inspired from having column names prefixed by database names when importing the data into R.
+
+One solution to this problem is to use "`as variable_name`" in you SQL code without giving the table an "`as table_name`" alias. This solution works fine when you have less than a dozen or so fields.  What if you had several hundred?  No one in a job with deadlines would rename every single field.
+
+###  Example
+
+For example, lets say that you have a HIVE table called fiscal_dates with 3 fields, greg_d, wk_end_d, and year.
+
+When you query this table, you would expect this:
+```{r}
+expected <- tibble::tribble(~greg_d,~wk_end_d,~year)
+str(expected)
+```
+
+Instead you get this:
+```{r}
+incorrect <- tibble::tribble(~fiscal_dates.greg_d,~fiscal_dates.wk_end_d,~fiscal_dates.year)
+str(incorrect)
+```
+
+The database prefix is very inefficient moving forward in any data wrangling and machine learning project.
+
+The `rm_db_name()` will remove the prefix and return a dataframe with the correct or desired column names.  
+```{r}
+corrected <- RToolShed::rm_db_name(incorrect,"fiscal_dates")
+str(corrected)
+```
+
+

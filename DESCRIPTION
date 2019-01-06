@@ -19,10 +19,10 @@ Imports:
     dplyr (>= 0.7.6),
     rlang (>= 0.2.1)
 Suggests: 
-    knitr (>= 1.2.0),
-    rmarkdown (>= 1.10),
-    testthat (>= 2.0.0)
+    knitr,
+    rmarkdown,
+    testthat (>= 2.0.0),
+    tibble (>= 1.4.2)
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-

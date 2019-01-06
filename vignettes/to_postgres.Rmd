@@ -1,10 +1,12 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "to_postgres"
+author: "Alfredo G Marquez"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{to_postgres}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
