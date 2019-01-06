@@ -25,7 +25,7 @@ usethis::use_news_md(open = interactive())
 # Import functions
 usethis::use_roxygen_md()
 usethis::use_pipe()
-import_pkg_list <- c("RPostgres","stringr","dbplyr","dplyr")
+import_pkg_list <- c("RPostgres","stringr","dbplyr","dplyr","rlang")
 purrr::map2(import_pkg_list, .y = "Imports", .f = usethis::use_package)
 
 # After adding roxygen2 params to function in R folder

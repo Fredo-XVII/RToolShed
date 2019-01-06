@@ -16,23 +16,13 @@ knitr::opts_chunk$set(
 
 # RToolShed ![](https://travis-ci.org/Fredo-XVII/RToolShed.svg?branch=master)
 
-The goal of RToolShed is to simplify and centralize re-usable R code.  There are times as a data analyst or a data scientist that we find ourselves writing the same code over and over across projects.  The central idea of the R Tool Shed package is to centralize the code to improve development and to standardize the functionality of the functions across projects. The idea of the RToolShed Not much different than how a carpenter stores his tools in a tool shed and pulls them out as needed depending on the project requirements.  Here the carpenters are data analyst and data scientist.
+The goal of RToolShed is to simplify and centralize re-usable R code.  There are times as a data analyst or a data scientist that we find ourselves writing the same code over and over across projects.  The central idea of the R Tool Shed package is to centralize the code to improve development and to standardize the functionality of the functions across projects. The idea of the RToolShed is not much different than how a carpenter stores his tools in a tool shed and pulls them out as needed depending on the project requirements.  Here the carpenters are data analyst and data scientist.
 
 ## Installation
 
-You can install the released version of RToolShed from [CRAN](https://CRAN.R-project.org) with:
+**NOTE: Not yet available on CRAN ** You can install the released version of RToolShed from [CRAN](https://CRAN.R-project.org), or GitHub, with:
 
 ``` r
 install.packages("RToolShed")
+devtools::install_github("Fredo-XVII/RToolShed")
 ```
-
-## Example
-
-I will display just a few of the functions in the package below, for more in-depth resource, please read over the vignettes.
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-## basic example code
-```
-

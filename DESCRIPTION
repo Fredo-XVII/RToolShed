@@ -1,6 +1,6 @@
 Package: RToolShed
 Type: Package
-Title: R Tool Shed
+Title: R Tool Shed: tools for Data Analysis and Data Science
 Version: 0.1.0
 Author: Alfredo G Marquez
 Maintainer: Alfredo G Marquez <alfredo.g.marquez@gmail.com>
@@ -11,17 +11,18 @@ Description: There are times as a data analyst or a data scientist that we find 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    magrittr (>= 1.5),
+    RPostgres (>= 1.1.1),
+    stringr (>= 1.3.1),
+    dbplyr (>= 1.2.1),
+    dplyr (>= 0.7.6),
+    rlang (>= 0.2.1)
 Suggests: 
-    knitr,
-    rmarkdown,
-    testthat
+    knitr (>= 1.2.0),
+    rmarkdown (>= 1.10),
+    testthat (>= 2.0.0)
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Imports: 
-    magrittr,
-    RPostgres,
-    stringr,
-    dbplyr,
-    dplyr,
-    rlang
+
