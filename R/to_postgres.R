@@ -1,9 +1,11 @@
 #' Push R Dataframes to Postgres schemas other than Public.
 #'
-#' @details #' require(RPostgres)
-#' require(stringr)
-#' require(dbplyr)
-
+#' There some cases where the Postgres servers are set up so that R is not able to build tables
+#' in schemas other than public. This function will create a delete any tables that exit in both
+#' the public schema and the destination schema, then it will re-build the data into public then
+#' into the desired schema.
+#'
+#' @details
 #' # package parameters:
 #' df <- brck_mrtr_dim  #1 input table
 #' pg_conn <- db_postgres #2 pg conn
@@ -13,21 +15,25 @@
 #' primary_keys <- "NA" # paste("co_loc_i", "co_loc_ref_i", sep = ",")#5 list of primary keys
 #'
 #' # package parameters:
-#' @param df Dataframe that will be pushed to Postgres
-#' @param pg_conn Connection String
-#' @param table_name Name of new table in Postgres
-#' @param schema_name Name of final schema if not public, default is public
-#' @param orderby Fields to order by
-#' @param primary_keys list of primary keys
+#' @param df Dataframe that will be pushed to Postgres, required.
+#' @param pg_conn Postgres connection, required.
+#' @param table_name <string> Name of new table in Postgres, required.
+#' @param schema_name <string> Name of final schema if not public, default is public.
+#' @param orderby <string> Fields to order by, used in a SQL statement, default is NA.
+#' @param primary_keys <string< Fields to for primary keys, used in a SQL statement, default is NA.
+#' @return Paste copy of output here
 #'
 #' @examples
-#' ## NOT RUN ##
-#' ## to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod", orderby = "group", primary_keys = "group,date") ##
+#' \dontrun{
+#' to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod",
+#' orderby = "group,date", primary_keys = "group,date")
+#' }
+#'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 
-to_postgres <- function(df,pg_conn,table_name,schema_name,orderby = "NA", primary_keys = "NA") {
+to_postgres <- function(df,pg_conn,table_name,schema_name = "public",orderby = "NA", primary_keys = "NA") {
   # Input Table
   col_tolower <- stringr::str_to_lower(base::colnames(df))
 

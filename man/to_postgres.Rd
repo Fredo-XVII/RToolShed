@@ -4,29 +4,33 @@
 \alias{to_postgres}
 \title{Push R Dataframes to Postgres schemas other than Public.}
 \usage{
-to_postgres(df, pg_conn, table_name, schema_name, orderby = "NA",
-  primary_keys = "NA")
+to_postgres(df, pg_conn, table_name, schema_name = "public",
+  orderby = "NA", primary_keys = "NA")
 }
 \arguments{
-\item{df}{Dataframe that will be pushed to Postgres}
+\item{df}{Dataframe that will be pushed to Postgres, required.}
 
-\item{pg_conn}{Connection String}
+\item{pg_conn}{Postgres connection, required.}
 
-\item{table_name}{Name of new table in Postgres}
+\item{table_name}{<string> Name of new table in Postgres, required.}
 
-\item{schema_name}{Name of final schema if not public, default is public}
+\item{schema_name}{<string> Name of final schema if not public, default is public.}
 
-\item{orderby}{Fields to order by}
+\item{orderby}{<string> Fields to order by, used in a SQL statement, default is NA.}
 
-\item{primary_keys}{list of primary keys}
+\item{primary_keys}{<string< Fields to for primary keys, used in a SQL statement, default is NA.}
+}
+\value{
+Paste copy of output here
 }
 \description{
-Push R Dataframes to Postgres schemas other than Public.
+There some cases where the Postgres servers are set up so that R is not able to build tables
+in schemas other than public. This function will create a delete any tables that exit in both
+the public schema and the destination schema, then it will re-build the data into public then
+into the desired schema.
 }
 \details{
-#' require(RPostgres)
-require(stringr)
-require(dbplyr)package parameters:
+package parameters:
 
 df <- brck_mrtr_dim  #1 input table
 pg_conn <- db_postgres #2 pg conn
@@ -36,6 +40,9 @@ orderby <- "NA" #"co_loc_ref_I"
 primary_keys <- "NA" # paste("co_loc_i", "co_loc_ref_i", sep = ",")#5 list of primary keyspackage parameters:
 }
 \examples{
-## NOT RUN ##
-## to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod", orderby = "group", primary_keys = "group,date") ##
+\dontrun{
+to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name = "prod",
+orderby = "group,date", primary_keys = "group,date")
+}
+
 }

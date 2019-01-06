@@ -9,8 +9,14 @@ rm_db_name(df, db_name)
 \arguments{
 \item{df}{Dataframe}
 
-\item{db_name}{The name of the table in the database that you want removed from the column names.}
+\item{db_name}{<string> The name of the table in the database that you want removed from the column names.}
+}
+\value{
+A dataframe is returned with the prefix database name of the column names removed.  In the example above
+the new dataframe would have column names variable1, variable2...etc.
 }
 \description{
-Remove the database column extensions that are created when query databases such as Hive.
+Remove the database column extensions that are created when query databases such as Hive.  In other words,
+when pulling data into R from HIVE, the name of the HIVE database is prefixed to all the column names.
+For example, if you HIVE table is called FOO, then your columns in R would be of the form FOO.variable1 FOO.variable2 ... etc.
 }
