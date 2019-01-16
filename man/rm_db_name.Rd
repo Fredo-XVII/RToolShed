@@ -20,3 +20,6 @@ Remove the database column extensions that are created when query databases such
 when pulling data into R from HIVE, the name of the HIVE database is prefixed to all the column names.
 For example, if you HIVE table is called FOO, then your columns in R would be of the form FOO.variable1 FOO.variable2 ... etc.
 }
+\details{
+Removes database extensions from column/fields/variable names.
+}

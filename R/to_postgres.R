@@ -33,6 +33,7 @@
 #' @importFrom rlang .data
 #' @export
 
+# RPostgres::dbWriteTable(con, name = DBI::Id(schema = "landing", table = "iris"), value = iris, overwrite = TRUE)
 to_postgres <- function(df,pg_conn,table_name,schema_name = "public",orderby = "NA", primary_keys = "NA") {
   # Input Table
   col_tolower <- stringr::str_to_lower(base::colnames(df))

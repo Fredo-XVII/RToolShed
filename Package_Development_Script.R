@@ -14,13 +14,15 @@ library(purrr)
 
 # Create Package
 #tmp <- file.path("FILEPATH", "TestContR")
-#create_package(tmp)
+usethis::use_package_doc()
 
 # Package Documentation
 usethis::use_travis()
 usethis::use_mit_license("Alfredo G Marquez")
 usethis::use_readme_rmd()
 usethis::use_news_md(open = interactive())
+usethis::use_pkgdown()
+usethis::use_package_doc()
 
 # Import functions
 usethis::use_roxygen_md()

@@ -1,6 +1,6 @@
 Package: RToolShed
 Type: Package
-Title: R Tool Shed: tools for Data Analysis and Data Science
+Title: Tools for Data Analysis and Data Science
 Version: 0.1.0
 Author: Alfredo G Marquez
 Maintainer: Alfredo G Marquez <alfredo.g.marquez@gmail.com>
