@@ -4,11 +4,25 @@
 \alias{dbCreatePrimaryIndex}
 \title{Create Primary Indexes for Postgres Table}
 \usage{
-dbCreatePrimaryIndex(df)
+dbCreatePrimaryIndex(pg_conn, table_name, primary_keys = "NA")
 }
 \arguments{
-\item{df}{}
+\item{pg_conn}{<connection string> Postgres connection pointer/string}
+
+\item{table_name}{<string> Postgres table name including schema.}
+
+\item{primary_keys}{<string> list of primary keys.}
+}
+\value{
+The results will look like the print out below.  It is a generic print
+out from RPostgres.  Check the table metadata in Postgres server to check primary
+key build.
 }
 \description{
 Description
+}
+\details{
+The table name needs to include the schema in the Postgres server.
+The list of primary keys can simply be "var1,var2,var3" because this will be
+inserted into an SQL statement that will be sent to the server.
 }

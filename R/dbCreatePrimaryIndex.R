@@ -8,8 +8,11 @@
 #'
 #' @param table_name <string> Postgres table name including schema.
 #' @param primary_keys <string> list of primary keys.
+#' @param pg_conn <connection string> Postgres connection pointer/string
 #'
-#' @return The results will look like the print out below.  It is generic.
+#' @return The results will look like the print out below.  It is a generic print
+#' out from RPostgres.  Check the table metadata in Postgres server to check primary
+#' key build.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data

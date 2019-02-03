@@ -5,6 +5,7 @@
 * Added a `README.md` file for documentation.
 * Added `Package_Development_Script.R` to track package build.
 * Added vignette doc.
-* Packages added in this version
+* Functions added in this version
   * - `to_postgres()`
-  * - `rm_db_name()`
+  * - `rm_db_name()
+  * - `dbCreatePrimaryIndex()``

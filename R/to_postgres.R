@@ -1,18 +1,12 @@
 #' Push R Dataframes to Postgres schemas other than Public.
 #'
 #' There some cases where the Postgres servers are set up so that R is not able to build tables
-#' in schemas other than public. This function will create a delete any tables that exit in both
+#' in schemas other than public. This function will delete any named tables that exit in both
 #' the public schema and the destination schema, then it will re-build the data into public then
 #' into the desired schema.
 #'
 #' @details
-#' # package parameters:
-#' df <- brck_mrtr_dim  #1 input table
-#' pg_conn <- db_postgres #2 pg conn
-#' table_name <- "sister_app_logs" #3 name of new table
-#' schema_name <- "landing" #4 name of final schema if not public
-#' orderby <- "NA" #"co_loc_ref_I"
-#' primary_keys <- "NA" # paste("co_loc_i", "co_loc_ref_i", sep = ",")#5 list of primary keys
+#' No Details
 #'
 #' # package parameters:
 #' @param df Dataframe that will be pushed to Postgres, required.
@@ -21,7 +15,8 @@
 #' @param schema_name <string> Name of final schema if not public, default is public.
 #' @param orderby <string> Fields to order by, used in a SQL statement, default is NA.
 #' @param primary_keys <string< Fields to for primary keys, used in a SQL statement, default is NA.
-#' @return Paste copy of output here
+#' @return Paste copy of output here.  You will get a generic message from RPostgres, check
+#' Postgres server for the data to ensure that the data was transferred.
 #'
 #' @examples
 #' \dontrun{
