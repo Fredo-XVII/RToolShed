@@ -16,6 +16,15 @@ library(purrr)
 #tmp <- file.path("FILEPATH", "TestContR")
 usethis::use_package_doc()
 
+# Add Functions
+usethis::use_r("rm_db_name")
+usethis::use_r("to_postgres")
+usethis::use_r("pg_dbCreatePrimaryIndex")
+usethis::use_r("ts_exposed")
+usethis::use_r("nest_it")
+usethis::use_r("prep_multidplyr")
+
+
 # Package Documentation
 usethis::use_travis()
 usethis::use_mit_license("Alfredo G Marquez")
