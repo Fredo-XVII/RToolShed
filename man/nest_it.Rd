@@ -2,10 +2,31 @@
 % Please edit documentation in R/nest_it.R
 \name{nest_it}
 \alias{nest_it}
-\title{Nest Dataframe}
+\title{Nest Dataframe by Grouping Variables
+
+Simple function to nest dataframes given a list of column names.}
 \usage{
 nest_it(.data, ...)
 }
+\arguments{
+\item{.data}{a dataframe}
+
+\item{...}{list of column name separated by a ',' to group by for nesting.
+Example: for the mctars df you would type: cyl, gear. No c(), no list(), no quotes.}
+}
+\value{
+This function returns a nested dataframe by the column names provided.
+The structure will be "Classes ‘tbl_df’, ‘tbl’ and 'data.frame':"
+}
 \description{
-Nest Dataframe
+Nest Dataframe by Grouping Variables
+
+Simple function to nest dataframes given a list of column names.
+}
+\examples{
+\dontrun{
+nest_it(mtcars, cyl,gear)
+mtcars \%>\% nest_it(cyl,gear)
+}
+
 }
