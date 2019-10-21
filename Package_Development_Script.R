@@ -23,6 +23,8 @@ usethis::use_r("pg_dbCreatePrimaryIndex")
 usethis::use_r("ts_exposed")
 usethis::use_r("nest_it")
 usethis::use_r("prep_multidplyr")
+usethis::use_r("write_df_to_hive")
+usethis::use_r("write_csv_to_hive")
 
 
 # Package Documentation
@@ -36,7 +38,7 @@ usethis::use_package_doc()
 # Import functions
 usethis::use_roxygen_md()
 usethis::use_pipe()
-import_pkg_list <- c("RPostgres","stringr","dbplyr","dplyr","rlang")
+import_pkg_list <- c("RPostgres","stringr","dbplyr","dplyr","rlang","tidyr","askpass","ssh")
 purrr::map2(import_pkg_list, .y = "Imports", .f = usethis::use_package)
 
 # After adding roxygen2 params to function in R folder
