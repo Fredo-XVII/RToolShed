@@ -1,7 +1,7 @@
 Package: RToolShed
 Type: Package
 Title: Tools for Data Analysis and Data Science
-Version: 0.1.1
+Version: 0.1.2
 Author: Alfredo G Marquez
 Maintainer: Alfredo G Marquez <alfredo.g.marquez@gmail.com>
 Description: There are times as a data analyst or a data scientist that we find ourselves writing
@@ -29,4 +29,4 @@ Suggests:
     tibble (>= 1.4.2)
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

@@ -10,11 +10,11 @@
 #'
 #' # package parameters:
 #' @param df Dataframe that will be pushed to Postgres, required.
-#' @param pg_conn <required> Postgres connection (PqConnection) created from RPostgres::Postgres().
+#' @param pg_conn required Postgres connection (PqConnection) created from RPostgres::Postgres().
 #' JDBC connections will break this function.
-#' @param table_name <string> Name of new table in Postgres, required.
-#' @param schema_name <string> Name of final schema if not public, default is public.
-#' @param primary_keys <string< Fields to for primary keys, used in a SQL statement, default is NA.
+#' @param table_name string Name of new table in Postgres, required.
+#' @param schema_name string Name of final schema if not public, default is public.
+#' @param primary_keys string Fields to for primary keys, used in a SQL statement, default is NA.
 #' @return Paste copy of output here.  You will get a generic message from RPostgres, check
 #' Postgres server for the data to ensure that the data was transferred.
 #'

@@ -4,8 +4,13 @@
 \alias{to_postgres}
 \title{Push R Dataframes to Postgres schemas other than Public.}
 \usage{
-to_postgres(df, pg_conn, schema_name = "public", table_name,
-  primary_keys = "NA")
+to_postgres(
+  df,
+  pg_conn,
+  schema_name = "public",
+  table_name,
+  primary_keys = "NA"
+)
 }
 \arguments{
 \item{df}{Dataframe that will be pushed to Postgres, required.}
@@ -30,7 +35,7 @@ the public schema and the destination schema, then it will re-build the data int
 into the desired schema.
 }
 \details{
-No Detailspackage parameters:
+No Details
 }
 \examples{
 \dontrun{
@@ -38,4 +43,6 @@ to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name =
 primary_keys = "group,date")
 }
 
+}
+\section{package parameters:}{
 }

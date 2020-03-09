@@ -4,7 +4,6 @@
 \name{RTooShed}
 \alias{RToolShed}
 \alias{RToolShed-package}
-\alias{RTooShed-package}
 \title{RToolShed: Tools for Data Analysis and Data Science}
 \description{
 There are times as a data analyst or a data scientist that we find ourselves writing

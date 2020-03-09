@@ -6,10 +6,10 @@
 #' The list of primary keys can simply be "var1,var2,var3" because this will be
 #' inserted into an SQL statement that will be sent to the server.
 #'
-#' @param table_name <string> Postgres table name.
-#' @param schema_name <string> Posgres schema name.
-#' @param primary_keys <string> list of primary keys.
-#' @param pg_conn <connection string> Postgres connection pointer/string (PqConnection)
+#' @param table_name string Postgres table name.
+#' @param schema_name string Posgres schema name.
+#' @param primary_keys string list of primary keys.
+#' @param pg_conn connection string Postgres connection pointer/string (PqConnection)
 #' created from RPostgres::Postgres(). JDBC connections will break this function.
 #'
 #' @return The results will look like the print out below.  It is a generic print

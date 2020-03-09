@@ -4,10 +4,10 @@
 #' Uploads an R dataframe and uploads it to Hive.  This assumes that when you log into
 #' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 #'
-#' @param df <dataframe> Dataframe to upload.
-#' @param id <string> ID of user
-#' @param server <string> server extention or path
-#' @param schema_table <string> "schema.table" Name of the table to write to in Hive.
+#' @param df dataframe Dataframe to upload.
+#' @param id string ID of user
+#' @param server string server extention or path
+#' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @return Does not return anything.
 #'
 #' @examples

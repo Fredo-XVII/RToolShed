@@ -8,7 +8,7 @@
 #' Removes database extensions from column/fields/variable names.
 #'
 #' @param df Dataframe
-#' @param db_name <string> The name of the table in the database that you want removed from the column names.
+#' @param db_name string The name of the table in the database that you want removed from the column names.
 #' @return A dataframe is returned with the prefix database name of the column names removed.  In the example above
 #' the new dataframe would have column names variable1, variable2...etc.
 #'

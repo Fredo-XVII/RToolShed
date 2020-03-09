@@ -5,9 +5,9 @@
 #' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 #'
 #' @param csv_file CSV file to upload; will be converted to dataframe by dplyr::read_csv.
-#' @param id <string> ID of user
-#' @param server <string> server extention or path
-#' @param schema_table <string> "schema.table" Name of the table to write to in Hive.
+#' @param id string ID of user
+#' @param server string server extention or path
+#' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @return Does not return anything.
 #'
 #' @examples
