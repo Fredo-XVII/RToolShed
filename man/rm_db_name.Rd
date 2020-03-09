@@ -9,7 +9,7 @@ rm_db_name(df, db_name)
 \arguments{
 \item{df}{Dataframe}
 
-\item{db_name}{<string> The name of the table in the database that you want removed from the column names.}
+\item{db_name}{string The name of the table in the database that you want removed from the column names.}
 }
 \value{
 A dataframe is returned with the prefix database name of the column names removed.  In the example above

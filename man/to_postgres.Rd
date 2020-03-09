@@ -15,14 +15,14 @@ to_postgres(
 \arguments{
 \item{df}{Dataframe that will be pushed to Postgres, required.}
 
-\item{pg_conn}{<required> Postgres connection (PqConnection) created from RPostgres::Postgres().
+\item{pg_conn}{required Postgres connection (PqConnection) created from RPostgres::Postgres().
 JDBC connections will break this function.}
 
-\item{schema_name}{<string> Name of final schema if not public, default is public.}
+\item{schema_name}{string Name of final schema if not public, default is public.}
 
-\item{table_name}{<string> Name of new table in Postgres, required.}
+\item{table_name}{string Name of new table in Postgres, required.}
 
-\item{primary_keys}{<string< Fields to for primary keys, used in a SQL statement, default is NA.}
+\item{primary_keys}{string Fields to for primary keys, used in a SQL statement, default is NA.}
 }
 \value{
 Paste copy of output here.  You will get a generic message from RPostgres, check
@@ -35,7 +35,7 @@ the public schema and the destination schema, then it will re-build the data int
 into the desired schema.
 }
 \details{
-No Details
+to_postgres() sends df to Postgres with options to create a primary index.
 }
 \examples{
 \dontrun{
@@ -43,6 +43,4 @@ to_postgres(df = DF, pg_conn = db_CON, table_name = "data_upload", schema_name =
 primary_keys = "group,date")
 }
 
-}
-\section{package parameters:}{
 }

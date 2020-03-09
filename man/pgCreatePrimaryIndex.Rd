@@ -4,17 +4,17 @@
 \alias{pgCreatePrimaryIndex}
 \title{Create Primary Indexes for Postgres Table}
 \usage{
-pgCreatePrimaryIndex(pg_conn, schema_name, table, primary_keys = "NA")
+pgCreatePrimaryIndex(pg_conn, schema_name, table_name, primary_keys = "NA")
 }
 \arguments{
-\item{pg_conn}{<connection string> Postgres connection pointer/string (PqConnection)
+\item{pg_conn}{connection string Postgres connection pointer/string (PqConnection)
 created from RPostgres::Postgres(). JDBC connections will break this function.}
 
-\item{schema_name}{<string> Posgres schema name.}
+\item{schema_name}{string Posgres schema name.}
 
-\item{primary_keys}{<string> list of primary keys.}
+\item{table_name}{string Postgres table name.}
 
-\item{table_name}{<string> Postgres table name.}
+\item{primary_keys}{string list of primary keys.}
 }
 \value{
 The results will look like the print out below.  It is a generic print

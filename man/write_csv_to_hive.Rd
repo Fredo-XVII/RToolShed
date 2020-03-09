@@ -9,11 +9,11 @@ write_csv_to_hive(csv_file, id, server, schema_table)
 \arguments{
 \item{csv_file}{CSV file to upload; will be converted to dataframe by dplyr::read_csv.}
 
-\item{id}{<string> ID of user}
+\item{id}{string ID of user}
 
-\item{server}{<string> server extention or path}
+\item{server}{string server extention or path}
 
-\item{schema_table}{<string> "schema.table" Name of the table to write to in Hive.}
+\item{schema_table}{string "schema.table" Name of the table to write to in Hive.}
 }
 \value{
 Does not return anything.

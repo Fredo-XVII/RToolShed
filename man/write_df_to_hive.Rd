@@ -7,13 +7,13 @@
 write_df_to_hive(df, id, server, schema_table)
 }
 \arguments{
-\item{df}{<dataframe> Dataframe to upload.}
+\item{df}{dataframe Dataframe to upload.}
 
-\item{id}{<string> ID of user}
+\item{id}{string ID of user}
 
-\item{server}{<string> server extention or path}
+\item{server}{string server extention or path}
 
-\item{schema_table}{<string> "schema.table" Name of the table to write to in Hive.}
+\item{schema_table}{string "schema.table" Name of the table to write to in Hive.}
 }
 \value{
 Does not return anything.

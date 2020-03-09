@@ -20,7 +20,7 @@
 #' @importFrom rlang .data
 #' @export
 
-pgCreatePrimaryIndex <- function (pg_conn, schema_name, table, primary_keys = "NA") {
+pgCreatePrimaryIndex <- function (pg_conn, schema_name, table_name, primary_keys = "NA") {
   # Build SQL Names
   schema_table1 <- paste0(schema_name,'.',table_name)
   schema_table2 <- paste0(schema_name,'_',table_name,"_keys")

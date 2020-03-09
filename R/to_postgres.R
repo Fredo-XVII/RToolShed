@@ -6,9 +6,8 @@
 #' into the desired schema.
 #'
 #' @details
-#' No Details
+#' to_postgres() sends df to Postgres with options to create a primary index.
 #'
-#' # package parameters:
 #' @param df Dataframe that will be pushed to Postgres, required.
 #' @param pg_conn required Postgres connection (PqConnection) created from RPostgres::Postgres().
 #' JDBC connections will break this function.
@@ -55,7 +54,7 @@ to_postgres <- function(df,pg_conn,schema_name = "public",table_name, primary_ke
   # Add keys
   if(primary_keys == "NA") { warning("Primary not specified; primary keys not set") }
   else {
-    RToolShed:::pgCreatePrimaryIndex(pg_conn = pg_conn,
+    RToolShed::pgCreatePrimaryIndex(pg_conn = pg_conn,
                                      table_name = table_name,
                                      schema_name = schema_name,
                                      primary_keys = primary_keys)
