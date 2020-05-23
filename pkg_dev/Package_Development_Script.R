@@ -22,7 +22,6 @@ usethis::use_appveyor()
 usethis::use_tidy_description() # add `Roxygen: list(markdown = TRUE)` to use markdown in Roxygen comments
 usethis::use_tidy_versions() # adds versions to Description file - cool
 usethis::use_package_doc()
-usethis::use_travis()
 usethis::use_mit_license("Alfredo G Marquez")
 #usethis::use_cc0_license("Alfredo G Marquez")
 usethis::use_readme_rmd()
@@ -42,6 +41,8 @@ usethis::use_r("nest_it")
 usethis::use_r("prep_multidplyr")
 usethis::use_r("write_df_to_hive")
 usethis::use_r("write_csv_to_hive")
+usethis::use_r("lag_it")
+usethis::use_r("diff_it")
 
 
 # Add Packages
