@@ -13,20 +13,25 @@ library(testthat)
 library(purrr)
 
 # Create Package, versioning, and documentation
-#tmp <- file.path("FILEPATH", "TestContR")
-usethis::use_package_doc()
+#tmp <- file.path("FILEPATH", "RToolShed")
+usethis::create_package(path = "C:\\Users\\marqu\\OneDrive\\Documents\\GitHub\\RToolShed")
 usethis::use_travis()
 usethis::use_appveyor()
 
-# Package Documentation and Vignettes
+## Package Documentation and Vignettes
+usethis::use_tidy_description() # add `Roxygen: list(markdown = TRUE)` to use markdown in Roxygen comments
+usethis::use_tidy_versions() # adds versions to Description file - cool
+usethis::use_package_doc()
 usethis::use_travis()
 usethis::use_mit_license("Alfredo G Marquez")
+#usethis::use_cc0_license("Alfredo G Marquez")
 usethis::use_readme_rmd()
 usethis::use_news_md(open = interactive())
 usethis::use_pkgdown()
 usethis::use_package_doc()
 usethis::use_vignette("to_postgres") #
 usethis::use_vignette("rm_db_name") #
+usethis::use_namespace()
 
 # Add Functions
 usethis::use_r("rm_db_name")
@@ -62,11 +67,8 @@ roxygen2::roxygenise()
 devtools::document()
 devtools::load_all()
 
-# Other Options
-usethis::use_tidy_versions() # adds versions to Description file - cool
-usethis::use_cc0_license("Alfredo G Marquez")
+# Build Tests
 
-usethis::use_namespace()
 usethis::use_testthat()
 
 # Update Version
