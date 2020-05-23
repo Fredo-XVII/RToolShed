@@ -5,4 +5,6 @@
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^Package_Development_Script.R
+^pkg_dev$
+^\.Rhistory$
+^appveyor\.yml$
