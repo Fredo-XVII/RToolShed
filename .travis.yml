@@ -1,5 +1,21 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
-sudo: false
+language: r
+
+r:
+  - oldrel
+#  - release
+#  - devel
 cache: packages
+
+# dependency for rgdal
+before_install:
+  - sudo apt update
+  - sudo apt-get update
+  - sudo apt-get -y install libssh-dev #package ssh dependency
+
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change

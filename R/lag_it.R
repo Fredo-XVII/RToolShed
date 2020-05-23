@@ -1,7 +1,7 @@
 # Functions Roxygen format
-#' @title
+#' @title Lag Variables up to `n` lags
 #'
-#' @description
+#' @description This function builds lags of a variable up to the `n` lag.
 #'
 #' @details
 #'
