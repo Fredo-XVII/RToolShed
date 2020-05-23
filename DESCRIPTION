@@ -2,7 +2,15 @@ Package: RToolShed
 Type: Package
 Title: Tools for Data Analysis and Data Science
 Version: 0.1.3
-Author: Alfredo G Marquez
+Authors@R: 
+    person(given = "Alfredo G",
+           family = "Marquez",
+           role = c("aut", "cre"),
+           email = "alfredo.g.marquez@gmail.com",
+           comment = c(ORCID = "0000-0001-7044-8167"))
+Date: 2020-04-01           
+URL: https://github.com/Fredo-XVII/RToolShed
+BugReports: https://github.com/Fredo-XVII/RToolShed/issues
 Maintainer: Alfredo G Marquez <alfredo.g.marquez@gmail.com>
 Description: There are times as a data analyst or a data scientist that we find ourselves writing
     the same code over and over across projects.  The central idea of the R Tool Shed package is
@@ -11,6 +19,8 @@ Description: There are times as a data analyst or a data scientist that we find 
 License: CC0
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.0.0)
 Imports: 
     magrittr (>= 1.5),
     DBI (>= 1.0.0),
@@ -28,7 +38,10 @@ Suggests:
     knitr (>= 1.25),
     rmarkdown (>= 1.16),
     testthat (>= 2.0.0),
-    tibble (>= 1.4.2)
+    tibble (>= 1.4.2),
+    covr,
+    remotes,
+    roxygen2
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0

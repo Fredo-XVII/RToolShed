@@ -11,6 +11,14 @@ There are times as a data analyst or a data scientist that we find ourselves wri
     to centralize the code to improve development and to standardize the functionality of the 
     functions across projects.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Fredo-XVII/RToolShed}
+  \item Report bugs at \url{https://github.com/Fredo-XVII/RToolShed/issues}
+}
+
+}
 \author{
 Alfredo G Marquez
 }
