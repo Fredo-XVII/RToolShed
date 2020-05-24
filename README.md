@@ -22,6 +22,8 @@ different than how a carpenter stores his tools in a tool shed and pulls
 them out as needed depending on the project requirements. Here the
 carpenters are data analyst and data scientist.
 
+[GitPage](https://fredo-xvii.github.io/RToolShed/) for more information.
+
 ## Installation
 
 **NOTE: Not yet available on CRAN ** You can install the released
