@@ -1,3 +1,10 @@
+# RToolShed 0.1.3
+
+* Functions added in this version
+ * - `lag_it()` 
+ * - `diff_it()`
+* Fixed errors in description file
+  
 # RToolShed 0.1.2
 
 * Test for R-3.6.3

@@ -4,20 +4,19 @@
 #' @description This function takes a column and builds the differences based
 #'     on the difference `k` between the column and the lag `n` specified.
 #'
-#' @details diff_it(df, col, lags, mutate_type)
+#' @details Build the differences of a variable
 #'
-#' @param df <Must be a dataframe or tibble
-#' @param col \<text\> Specify the column/field/variable for differencing.
-#' @param lags \<number\> Specify the number of lags for differencing.
-#' @param diff \<number\> Specify the number of differences for differencing.
-#' @param mutate_type \<text\> Select whether to `mutate()` or `transmute()` from dplyr.
+#' @param df Must be a dataframe or tibble
+#' @param col Specify the column/field/variable for differencing.
+#' @param lags Specify the number of lags for differencing.
+#' @param diff Specify the number of differences for differencing.
+#' @param mutate_type Select whether to `mutate()` or `transmute()` from dplyr.
 #'
 #' @return A dataframe with the lagged differences of the column specified.
 #'
 #' @examples
 #' library(magrittr)
-#' df <- datasets::airmiles %>% as.vector() %>% tibble::as_tibble()
-#' names(df) <- c("airmiles")
+#' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
 #' diff_it(df, col = "airmiles") %>% head()
 #'
 #' @import dplyr

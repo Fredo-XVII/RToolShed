@@ -9,11 +9,11 @@ lag_it(df, col = NULL, lags = 1, mutate_type = c("mutate", "trans"))
 \arguments{
 \item{df}{Must be a dataframe or tibble}
 
-\item{col}{\<text\> Specify the column/field/variable for differencing.}
+\item{col}{Specify the column/field/variable for differencing.}
 
-\item{lags}{\<number\> Specify the number of lags for differencing.}
+\item{lags}{Specify the number of lags for differencing.}
 
-\item{mutate_type}{\<text\> Select whether to \code{mutate()} or \code{transmute()} from dplyr.}
+\item{mutate_type}{Select whether to \code{mutate()} or \code{transmute()} from dplyr.}
 }
 \value{
 A dataframe with the lags of the column specified.
@@ -22,12 +22,11 @@ A dataframe with the lags of the column specified.
 This function builds lags of a variable up to the \code{n} lag.
 }
 \details{
-lag_it(df, col, lags, mutate_type)
+Build the lags of a variable
 }
 \examples{
 library(magrittr)
-df <- datasets::airmiles \%>\% as.vector() \%>\% tibble::as_tibble()
-names(df) <- c("airmiles")
+df <- datasets::airmiles \%>\% as.vector() \%>\% tibble::enframe(name = "airmiles")
 lag_it(df, col = "airmiles") \%>\% head()
 
 }

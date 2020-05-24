@@ -7,15 +7,15 @@
 diff_it(df, col = NULL, lags = 1, diff = 1, mutate_type = c("mutate", "trans"))
 }
 \arguments{
-\item{df}{<Must be a dataframe or tibble}
+\item{df}{Must be a dataframe or tibble}
 
-\item{col}{\<text\> Specify the column/field/variable for differencing.}
+\item{col}{Specify the column/field/variable for differencing.}
 
-\item{lags}{\<number\> Specify the number of lags for differencing.}
+\item{lags}{Specify the number of lags for differencing.}
 
-\item{diff}{\<number\> Specify the number of differences for differencing.}
+\item{diff}{Specify the number of differences for differencing.}
 
-\item{mutate_type}{\<text\> Select whether to \code{mutate()} or \code{transmute()} from dplyr.}
+\item{mutate_type}{Select whether to \code{mutate()} or \code{transmute()} from dplyr.}
 }
 \value{
 A dataframe with the lagged differences of the column specified.
@@ -25,12 +25,11 @@ This function takes a column and builds the differences based
 on the difference \code{k} between the column and the lag \code{n} specified.
 }
 \details{
-diff_it(df, col, lags, mutate_type)
+Build the differences of a variable
 }
 \examples{
 library(magrittr)
-df <- datasets::airmiles \%>\% as.vector() \%>\% tibble::as_tibble()
-names(df) <- c("airmiles")
+df <- datasets::airmiles \%>\% as.vector() \%>\% tibble::enframe(name = "airmiles")
 diff_it(df, col = "airmiles") \%>\% head()
 
 }
