@@ -16,7 +16,7 @@ Description: There are times as a data analyst or a data scientist that we find 
     the same code over and over across projects.  The central idea of the R Tool Shed package is
     to centralize the code to improve development and to standardize the functionality of the 
     functions across projects.
-License: CC0
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
