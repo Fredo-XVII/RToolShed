@@ -14,6 +14,11 @@ before_install:
   - sudo apt-get update
   - sudo apt-get -y install libssh-dev #package ssh dependency
 
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
 
 notifications:
   email:
