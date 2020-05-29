@@ -15,11 +15,11 @@
 #' @return A dataframe with the lagged differences of the column specified.
 #'
 #' @examples
-#' \dontrun{
+#>' \dontrun{
 #' library(magrittr)
-#>' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
-#>' diff_it(df, col = "airmiles") %>% head()
-#' }
+#' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
+#' diff_it(df, col = "airmiles") %>% head()
+#>' }
 #'
 #' @import dplyr
 #' @importFrom glue glue
