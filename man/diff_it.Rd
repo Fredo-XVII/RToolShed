@@ -28,8 +28,8 @@ on the difference \code{k} between the column and the lag \code{n} specified.
 Build the differences of a variable
 }
 \examples{
-\dontrun{
 library(magrittr)
-}
+df <- datasets::airmiles \%>\% as.vector() \%>\% tibble::enframe(name = "airmiles")
+diff_it(df, col = "airmiles") \%>\% head()
 
 }
