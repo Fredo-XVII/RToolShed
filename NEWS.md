@@ -4,6 +4,7 @@
  * - `lag_it()` 
  * - `diff_it()`
 * Fixed errors in description file
+* Fixed errors with namespace file
   
 # RToolShed 0.1.2
 
