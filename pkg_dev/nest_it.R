@@ -10,6 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' library(magrittr)
 #' nest_it(mtcars, cyl,gear)
 #' mtcars %>% nest_it(cyl,gear)
 #' }

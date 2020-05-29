@@ -17,7 +17,6 @@
 #' @param pkgs character list of packages
 #' @param ... any other arguments passed to install.packages()
 #'
-#' @importFrom magrittr %>%
 #' @importFrom utils install.packages
 
 #' @export

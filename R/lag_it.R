@@ -3,7 +3,7 @@
 #'
 #' @description This function builds lags of a variable up to the `n` lag.
 #'
-#' @details Build the lags of a variable
+#' @details Build the lags of a variable.
 #'
 #' @param df Must be a dataframe or tibble
 #' @param col Specify the column/field/variable for differencing.
@@ -13,19 +13,21 @@
 #' @return A dataframe with the lags of the column specified.
 #'
 #' @examples
+#' \dontrun{
 #' library(magrittr)
-#' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
-#' lag_it(df, col = "airmiles") %>% head()
+#>' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
+#>' lag_it(df, col = "airmiles") %>% head()
+#' }
 #'
 #' @import dplyr
 #' @importFrom glue glue
-#' @importFrom rlang abort .data
+#' @import rlang
 #' @importFrom stats setNames
 #' @importFrom magrittr %>%
 #'
 #' @export
 
-# Lags and Differences
+
 lag_it <- function(df,col = NULL,lags = 1, mutate_type = c("mutate","trans")) {
 
   if(is.null(col)){

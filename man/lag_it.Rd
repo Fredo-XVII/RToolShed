@@ -22,11 +22,11 @@ A dataframe with the lags of the column specified.
 This function builds lags of a variable up to the \code{n} lag.
 }
 \details{
-Build the lags of a variable
+Build the lags of a variable.
 }
 \examples{
+\dontrun{
 library(magrittr)
-df <- datasets::airmiles \%>\% as.vector() \%>\% tibble::enframe(name = "airmiles")
-lag_it(df, col = "airmiles") \%>\% head()
+}
 
 }

@@ -16,8 +16,7 @@
 #' out from RPostgres.  Check the table metadata in Postgres server to check primary
 #' key build.
 #'
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' @import rlang
 #' @export
 
 pgCreatePrimaryIndex <- function (pg_conn, schema_name, table_name, primary_keys = "NA") {

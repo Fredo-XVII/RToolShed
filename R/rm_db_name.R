@@ -12,8 +12,7 @@
 #' @return A dataframe is returned with the prefix database name of the column names removed.  In the example above
 #' the new dataframe would have column names variable1, variable2...etc.
 #'
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' @import rlang
 #' @export
 
 

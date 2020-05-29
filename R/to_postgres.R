@@ -23,8 +23,7 @@
 #' primary_keys = "group,date")
 #' }
 #'
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' @import rlang
 #' @export
 
 # RPostgres::dbWriteTable(con, name = DBI::Id(schema = "landing", table = "iris"), value = iris, overwrite = TRUE)

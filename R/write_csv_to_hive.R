@@ -16,6 +16,7 @@
 #' library(dplyr)
 #' library(readr)
 #' library(rstudioapi)
+#' library(magrittr)
 #' df <- mtcars
 #' zid <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
