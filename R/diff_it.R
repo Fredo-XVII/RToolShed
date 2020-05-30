@@ -6,11 +6,11 @@
 #'
 #' @details Build the differences of a variable
 #'
-#' @param df Must be a dataframe or tibble
-#' @param col Specify the column/field/variable for differencing.
-#' @param lags Specify the number of lags for differencing.
-#' @param diff Specify the number of differences for differencing.
-#' @param mutate_type Select whether to `mutate()` or `transmute()` from dplyr.
+#' @param df dataframe or tibble
+#' @param col string - specify the column/field/variable for differencing.
+#' @param lags number - specify the number of lags for differencing.
+#' @param diff number - specify the number of differences for differencing.
+#' @param mutate_type string - select whether to `mutate()` or `transmute()` from dplyr.
 #'
 #' @return A dataframe with the lagged differences of the column specified.
 #'
