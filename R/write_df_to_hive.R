@@ -5,7 +5,7 @@
 #' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 #'
 #' @param df dataframe Dataframe to upload.
-#' @param id string ID of user
+#' @param id string ID of user. `.pwd` will be requested from the user at function call.
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @return Does not return anything.
@@ -20,7 +20,7 @@
 #' zid <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
 #' schema_table <- 'schema.table'
-#' .pwd <- rstudioapi::askForPassword('password')
+#' .pwd <- askpass::askpass('password')
 #' write_df_to_hive(df = df, id = zid, server = server, schema_table = schema_table)
 #' }
 #'

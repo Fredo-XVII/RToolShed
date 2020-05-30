@@ -5,7 +5,7 @@
 #' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 #'
 #' @param csv_file CSV file to upload; will be converted to dataframe by dplyr::read_csv.
-#' @param id string ID of user
+#' @param id string ID of user. `.pwd` will be requested from the user at function call.
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @return Does not return anything.
@@ -21,7 +21,7 @@
 #' zid <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
 #' schema_table <- 'schema.table'
-#' .pwd <- rstudioapi::askForPassword('password')
+#' .pwd <- askpass::askpass('password')
 #' file <- c('table_for_hive.csv')
 #' write_csv_to_hive(csv_file = file, id = zid, server = server, schema_table = schema_table)
 #' }
@@ -75,7 +75,7 @@ write_csv_to_hive <- function(csv_file, id, server, schema_table) {
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query)))
 
-  # Disconnect and rm password and csv file
+  # Disconnect and rm password
   ssh::ssh_disconnect(session)
   rm(.pwd)
 }
