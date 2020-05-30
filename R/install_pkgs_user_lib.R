@@ -14,7 +14,7 @@
 #'   install.pkgs.user_lib(pkgs = pkgs, dependencies = TRUE)
 #' }
 #'
-#' @param pkgs character list of packages
+#' @param pkgs string character vector list of packages
 #' @param ... any other arguments passed to install.packages()
 #'
 #' @importFrom utils install.packages
