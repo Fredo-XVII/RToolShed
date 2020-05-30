@@ -17,6 +17,8 @@
 #' key build.
 #'
 #' @import rlang
+#' @import dplyr
+#' @import RPostgres
 #' @export
 
 pgCreatePrimaryIndex <- function (pg_conn, schema_name, table_name, primary_keys = "NA") {
