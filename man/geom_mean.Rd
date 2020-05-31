@@ -22,6 +22,7 @@ This functions creates a geometric mean of a numeric vector.
 }
 \examples{
 library(tibbletime)
+library(purrr)
 geom_mean_3 <- purrr::partial(geom_mean, roll_window = 3)
 geom_mean_roll_3 <- tibbletime::rollify(geom_mean_3,window = 3)
 data <- c(20,25,38,15,70)

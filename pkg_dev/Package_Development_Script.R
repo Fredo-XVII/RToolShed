@@ -51,17 +51,15 @@ usethis::use_r("diff_it")
 usethis::use_roxygen_md()
 usethis::use_pipe()
 import_pkg_list <- c("RPostgres","stringr","dbplyr","dplyr","rlang","tidyr","askpass","ssh",
-                     "glue")
+                     "glue", "purrr")
 purrr::map2(import_pkg_list, .y = "Imports", .f = usethis::use_package)
 
 ## Suggests
 
-usethis::use_package( "roxygen2", type = "Suggests")
+### remotes for appveyor build
+suggests_pkg_list <- c("roxygen2","kableExtra","remotes","knitr","rmarkdown","testthat","covr")
 
-usethis::use_package( "kableExtra", type = "Suggests")
-
-usethis::use_package( "remotes", type = "Suggests") #appveyor build
-
+purrr::map2(suggests_pkg_list, .y = "Suggests", .f = usethis::use_package)
 
 # After adding roxygen2 params to function in R folder
 roxygen2::roxygenise()
