@@ -1,6 +1,6 @@
-#' @title  Convert radians to degree: d = r ⋅ 180 ∕ π
+#' @title  Convert radians to degree
 #'
-#' @details Convert radians to degree: d = r ⋅ 180 ∕ π
+#' @description Convert radians to degree: d = r x 180 x (1/pi)
 #'
 #' @param r numeric - radians, or output from a trigonmetric functions.
 #'

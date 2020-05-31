@@ -2,7 +2,7 @@
 % Please edit documentation in R/rad2deg.R
 \name{rad2deg}
 \alias{rad2deg}
-\title{Convert radians to degree: d = r ⋅ 180 ∕ π}
+\title{Convert radians to degree}
 \usage{
 rad2deg(r)
 }
@@ -13,10 +13,7 @@ rad2deg(r)
 A number in degrees that was converted from radians.
 }
 \description{
-Convert radians to degree: d = r ⋅ 180 ∕ π
-}
-\details{
-Convert radians to degree: d = r ⋅ 180 ∕ π
+Convert radians to degree: d = r x 180 x (1/pi)
 }
 \examples{
 rads <- sin(4/5)
