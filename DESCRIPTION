@@ -42,7 +42,8 @@ Suggests:
     testthat (>= 2.0.0),
     covr,
     remotes,
-    roxygen2
+    roxygen2,
+    tibbletime
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
