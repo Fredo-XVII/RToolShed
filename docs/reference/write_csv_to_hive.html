@@ -143,7 +143,7 @@
     </tr>
     <tr>
       <th>id</th>
-      <td><p>string ID of user</p></td>
+      <td><p>string ID of user. <code>.pwd</code> will be requested from the user at function call.</p></td>
     </tr>
     <tr>
       <th>server</th>
@@ -174,7 +174,7 @@ Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``</p>
 <span class='no'>zid</span> <span class='kw'>&lt;-</span> <span class='st'>'XXXXX'</span>
 <span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='st'>'edge.hadoop.co.com'</span>
 <span class='no'>schema_table</span> <span class='kw'>&lt;-</span> <span class='st'>'schema.table'</span>
-<span class='no'>.pwd</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rstudioapi</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rstudioapi/man/askForPassword.html'>askForPassword</a></span>(<span class='st'>'password'</span>)
+<span class='no'>.pwd</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>askpass</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/askpass/man/askpass.html'>askpass</a></span>(<span class='st'>'password'</span>)
 <span class='no'>file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'table_for_hive.csv'</span>)
 <span class='fu'>write_csv_to_hive</span>(<span class='kw'>csv_file</span> <span class='kw'>=</span> <span class='no'>file</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>zid</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='no'>server</span>, <span class='kw'>schema_table</span> <span class='kw'>=</span> <span class='no'>schema_table</span>)
 }</div></pre>
