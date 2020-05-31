@@ -9,6 +9,7 @@
 #' @return Returns the geometric mean of a vector, or one number.
 #'
 #' @examples
+#' library(tibbletime)
 #' geom_mean_3 <- purrr::partial(geom_mean, roll_window = 3)
 #' geom_mean_roll_3 <- tibbletime::rollify(geom_mean_3,window = 3)
 #' data <- c(20,25,38,15,70)
