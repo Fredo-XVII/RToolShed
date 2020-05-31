@@ -7,7 +7,7 @@
 install.pkgs.user_lib(pkgs, ...)
 }
 \arguments{
-\item{pkgs}{character list of packages}
+\item{pkgs}{string character vector list of packages}
 
 \item{...}{any other arguments passed to install.packages()}
 }

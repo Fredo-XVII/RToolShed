@@ -7,13 +7,13 @@
 lag_it(df, col = NULL, lags = 1, mutate_type = c("mutate", "trans"))
 }
 \arguments{
-\item{df}{Must be a dataframe or tibble}
+\item{df}{dataframe or tibble}
 
-\item{col}{Specify the column/field/variable for differencing.}
+\item{col}{string - specify the column/field/variable for differencing.}
 
-\item{lags}{Specify the number of lags for differencing.}
+\item{lags}{number - specify the number of lags for differencing.}
 
-\item{mutate_type}{Select whether to \code{mutate()} or \code{transmute()} from dplyr.}
+\item{mutate_type}{string - select whether to \code{mutate()} or \code{transmute()} from dplyr.}
 }
 \value{
 A dataframe with the lags of the column specified.

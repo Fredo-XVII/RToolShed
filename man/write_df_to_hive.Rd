@@ -9,7 +9,7 @@ write_df_to_hive(df, id, server, schema_table)
 \arguments{
 \item{df}{dataframe Dataframe to upload.}
 
-\item{id}{string ID of user}
+\item{id}{string ID of user. \code{.pwd} will be requested from the user at function call.}
 
 \item{server}{string server extention or path}
 
@@ -35,7 +35,7 @@ df <- mtcars
 zid <- 'XXXXX'
 server <- 'edge.hadoop.co.com'
 schema_table <- 'schema.table'
-.pwd <- rstudioapi::askForPassword('password')
+.pwd <- askpass::askpass('password')
 write_df_to_hive(df = df, id = zid, server = server, schema_table = schema_table)
 }
 
