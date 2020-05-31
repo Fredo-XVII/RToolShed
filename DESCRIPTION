@@ -35,15 +35,15 @@ Imports:
     ssh (>= 0.6.0),
     glue (>= 1.3.1),
     tsibble (>= 0.8.4),
-    tibble (>= 1.4.2)
+    tibble (>= 1.4.2),
+    tibbletime
 Suggests: 
     knitr (>= 1.25),
     rmarkdown (>= 1.16),
     testthat (>= 2.0.0),
     covr,
     remotes,
-    roxygen2,
-    tibbletime
+    roxygen2
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
