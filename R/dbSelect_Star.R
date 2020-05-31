@@ -7,7 +7,7 @@
 #'
 #' @return a dataframe/tibble with the results of the query.
 #'
-#' @import glue glue
+#' @importFrom glue glue
 #'
 #' @examples
 #' \dontrun{
