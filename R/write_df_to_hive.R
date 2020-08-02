@@ -35,7 +35,7 @@ write_df_to_hive <- function(df, id, server, schema_table) {
 
   # Get Password and set csv file name
   .pwd <- askpass::askpass('password')
-  files <- c("table_for_hive.csv")
+  files <- paste0(substitute(df),".csv")
 
   # Build MetaData
   readr::write_csv(df, files)
@@ -48,13 +48,16 @@ write_df_to_hive <- function(df, id, server, schema_table) {
                                       TRUE ~ 'STRING'))
   cols_for_hive <- paste(schema_df$col_names, " ", schema_df$hive_col_types, collapse = ",\n")
 
-  # ssh to hive
+  # SSH to Hive
   login <- paste0(toupper(id),'@',server)
   session <- ssh::ssh_connect(login, passwd = .pwd)
 
+  # Make Directory for SCP
+  hdfs_dir <- sprintf("/home_dir/%s/write_df_to_hive/",tolower(id))
+  ssh::ssh_exec_wait(session, command = c(paste('mkdir',hdfs_dir)))
+
   # Upload Csv file
-  files <- c('table_for_hive.csv')
-  ssh::scp_upload(session, files, to = "~/data-from-rstudio/")
+  ssh::scp_upload(session, files, to = hdfs_dir)
 
   query <- dplyr::sql(paste0(
     "hive -e ",
@@ -65,9 +68,8 @@ write_df_to_hive <- function(df, id, server, schema_table) {
     FIELDS TERMINATED BY ","
     STORED AS TEXTFILE ',
     'tblproperties ("skip.header.line.count"="1");',
-    "\n LOAD DATA LOCAL INPATH ", '"/home_dir/',
-    tolower(id),
-    "/data-from-rstudio/",
+    "\n LOAD DATA LOCAL INPATH ",
+    '"',hdfs_dir,
     '" OVERWRITE INTO TABLE ',
     schema_table,
     ";'"
@@ -76,6 +78,7 @@ write_df_to_hive <- function(df, id, server, schema_table) {
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query)))
 
   # Disconnect and rm password and csv file
+  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',hdfs_dir))) # rm -rf dirname
   ssh::ssh_disconnect(session)
   rm(.pwd)
   file.remove(sprintf('./%s',files))
