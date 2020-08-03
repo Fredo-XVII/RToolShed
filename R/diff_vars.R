@@ -18,7 +18,7 @@
 #>' \dontrun{
 #' library(magrittr)
 #' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
-#' diff_it(df, col = "airmiles") %>% head()
+#' diff_vars(df, col = "airmiles") %>% head()
 #>' }
 #'
 #' @import dplyr
@@ -29,7 +29,7 @@
 #'
 #' @export
 
-diff_it <- function(df,col = NULL,lags = 1, diff = 1, mutate_type = c("mutate","trans")) {
+diff_vars <- function(df,col = NULL,lags = 1, diff = 1, mutate_type = c("mutate","trans")) {
 
   if(is.null(col)){
     rlang::abort(message = "'col' argument is missing, please specify a column name",

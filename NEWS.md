@@ -8,6 +8,9 @@
 
 * Feature Request:
   - Parameter: add parameter to the `write_to_*` functions that will allow appending instead of overwrite.  The default will remain overwrite.
+  
+* Function update:
+  - change function name from lag_it to lag_vars, and diff_it to diff_vars.
 
 # RToolShed 0.1.4
 

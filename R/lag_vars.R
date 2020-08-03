@@ -16,7 +16,7 @@
 #>' \dontrun{
 #' library(magrittr)
 #' df <- datasets::airmiles %>% as.vector() %>% tibble::enframe(name = "airmiles")
-#' lag_it(df, col = "airmiles") %>% head()
+#' lag_vars(df, col = "airmiles") %>% head()
 #>' }
 #'
 #' @import dplyr
@@ -28,7 +28,7 @@
 #' @export
 
 
-lag_it <- function(df,col = NULL,lags = 1, mutate_type = c("mutate","trans")) {
+lag_vars <- function(df,col = NULL,lags = 1, mutate_type = c("mutate","trans")) {
 
   if(is.null(col)){
     rlang::abort(message = "'col' argument is missing, please specify a column name",
