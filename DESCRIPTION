@@ -1,7 +1,7 @@
 Package: RToolShed
 Type: Package
 Title: Tools for Data Analysis and Data Science
-Version: 0.1.4
+Version: 0.1.5
 Authors@R: 
     person(given = "Alfredo G",
            family = "Marquez",

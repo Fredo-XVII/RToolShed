@@ -4,7 +4,7 @@
 \alias{write_csv_to_hive}
 \title{Write a CSV file to Hive}
 \usage{
-write_csv_to_hive(csv_file, id, server, schema_table)
+write_csv_to_hive(csv_file, id, server, schema_table, append_data = FALSE)
 }
 \arguments{
 \item{csv_file}{path to CSV file to upload, if only the name of file is provided,
@@ -16,6 +16,8 @@ getwd(); see dplyr::read_csv documentation for further information.}
 \item{server}{string server extention or path}
 
 \item{schema_table}{string "schema.table" Name of the table to write to in Hive.}
+
+\item{append_data}{logical, defaults to FALSE for overwrite; TRUE appends the to the data.}
 }
 \value{
 Does not return anything.

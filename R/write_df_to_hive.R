@@ -8,6 +8,7 @@
 #' @param id string ID of user. `.pwd` will be requested from the user at function call.
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
+#' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
 #' @return Does not return anything.
 #'
 #' @examples
@@ -31,7 +32,7 @@
 #' @import askpass
 #' @export
 
-write_df_to_hive <- function(df, id, server, schema_table) {
+write_df_to_hive <- function(df, id, server, schema_table, append_data = FALSE) {
 
   # Get Password and set csv file name
   .pwd <- askpass::askpass('password')
@@ -59,6 +60,13 @@ write_df_to_hive <- function(df, id, server, schema_table) {
   # Upload Csv file
   ssh::scp_upload(session, csv_file, to = hdfs_dir)
 
+  # Append or not Append, that is the question
+  append_script <- if (append_data == TRUE) {
+    ' INTO TABLE '
+  } else {
+    ' OVERWRITE INTO TABLE '
+  }
+
   query <- dplyr::sql(paste0(
     "hive -e ",
     "'create table if not exists ", schema_table, " (\n",
@@ -70,7 +78,7 @@ write_df_to_hive <- function(df, id, server, schema_table) {
     'tblproperties ("skip.header.line.count"="1");',
     "\n LOAD DATA LOCAL INPATH ",
     '"',hdfs_dir,
-    '" OVERWRITE INTO TABLE ',
+    '"',append_script,
     schema_table,
     ";'"
   ))

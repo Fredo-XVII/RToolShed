@@ -4,7 +4,7 @@
 \alias{write_df_to_hive}
 \title{Write an R dataframe to Hive}
 \usage{
-write_df_to_hive(df, id, server, schema_table)
+write_df_to_hive(df, id, server, schema_table, append_data = FALSE)
 }
 \arguments{
 \item{df}{dataframe Dataframe to upload; df is converted to csv for upload.}
@@ -14,6 +14,8 @@ write_df_to_hive(df, id, server, schema_table)
 \item{server}{string server extention or path}
 
 \item{schema_table}{string "schema.table" Name of the table to write to in Hive.}
+
+\item{append_data}{logical, defaults to FALSE for overwrite; TRUE appends the to the data.}
 }
 \value{
 Does not return anything.
