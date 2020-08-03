@@ -4,7 +4,9 @@
 #' Uploads a CSV file and uploads it to Hive.  This assumes that when you log into
 #' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 #'
-#' @param csv_file CSV file to upload; will be converted to dataframe by dplyr::read_csv.
+#' @param csv_file path to CSV file to upload, if only the name of file is provided,
+#' then it is assumed the file is in the current working directory reported by
+#' getwd(); see dplyr::read_csv documentation for further information.
 #' @param id string ID of user. `.pwd` will be requested from the user at function call.
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
@@ -39,7 +41,7 @@ write_csv_to_hive <- function(csv_file, id, server, schema_table) {
   .pwd <- askpass::askpass('password')
 
   # Build MetaData
-  df <- readr::read_csv(csv_file)
+  df <- readr::read_csv(file = csv_file)
   col_names <- names(df)
   col_types <- sapply(df, class)
   schema_df <- data.frame(col_names, col_types) %>%
@@ -53,8 +55,12 @@ write_csv_to_hive <- function(csv_file, id, server, schema_table) {
   login <- paste0(toupper(id),'@',server)
   session <- ssh::ssh_connect(login, passwd = .pwd)
 
+  # Make Directory for SCP
+  hdfs_dir <- sprintf("/home_dir/%s/write_csv_to_hive/",tolower(id))
+  ssh::ssh_exec_wait(session, command = c(paste('mkdir',hdfs_dir)))
+
   # Upload Csv file
-  ssh::scp_upload(session, csv_file, to = "~/data-from-rstudio/")
+  ssh::scp_upload(session, csv_file, to = hdfs_dir)
 
   query <- dplyr::sql(paste0(
     "hive -e ",
@@ -65,9 +71,8 @@ write_csv_to_hive <- function(csv_file, id, server, schema_table) {
     FIELDS TERMINATED BY ","
     STORED AS TEXTFILE ',
     'tblproperties ("skip.header.line.count"="1");',
-    "\n LOAD DATA LOCAL INPATH ", '"/home_dir/',
-    tolower(id),
-    "/data-from-rstudio/",
+    "\n LOAD DATA LOCAL INPATH ",
+    '"',hdfs_dir,
     '" OVERWRITE INTO TABLE ',
     schema_table,
     ";'"
@@ -75,7 +80,8 @@ write_csv_to_hive <- function(csv_file, id, server, schema_table) {
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query)))
 
-  # Disconnect and rm password
+  # Disconnect and rm password and csv file from hadoop
+  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',hdfs_dir))) # rm -rf dirname
   ssh::ssh_disconnect(session)
   rm(.pwd)
 }

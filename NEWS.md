@@ -1,3 +1,11 @@
+# RToolShed 0.1.5
+* Bug fix:
+  - `write_df_to_hive()`: 
+    - removed static path to write to and replaced with code that will build and delete a new directory where the dataframe will be saved on the server. Updated docs.  
+    - replace `file` with `csv_file` so that it conforms with `write_csv_to_hive()`
+  - `write_csv_to_hive()`: removed static path to write to and replaced with code that will build and delete a new directory where the dataframe will be saved on the server. Update docs.
+  
+
 # RToolShed 0.1.4
 
 *  Functions added in this version:

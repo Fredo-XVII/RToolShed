@@ -7,7 +7,9 @@
 write_csv_to_hive(csv_file, id, server, schema_table)
 }
 \arguments{
-\item{csv_file}{CSV file to upload; will be converted to dataframe by dplyr::read_csv.}
+\item{csv_file}{path to CSV file to upload, if only the name of file is provided,
+then it is assumed the file is in the current working directory reported by
+getwd(); see dplyr::read_csv documentation for further information.}
 
 \item{id}{string ID of user. \code{.pwd} will be requested from the user at function call.}
 

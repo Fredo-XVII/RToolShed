@@ -7,7 +7,7 @@
 write_df_to_hive(df, id, server, schema_table)
 }
 \arguments{
-\item{df}{dataframe Dataframe to upload.}
+\item{df}{dataframe Dataframe to upload; df is converted to csv for upload.}
 
 \item{id}{string ID of user. \code{.pwd} will be requested from the user at function call.}
 
