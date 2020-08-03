@@ -81,7 +81,7 @@ write_csv_to_hive <- function(csv_file, id, server, schema_table, append_data = 
     'tblproperties ("skip.header.line.count"="1");',
     "\n LOAD DATA LOCAL INPATH ",
     '"',hdfs_dir,
-    '"',append_script, #OVERWRITE INTO TABLE ',
+    '"',append_script,
     schema_table,
     ";'"
   ))
