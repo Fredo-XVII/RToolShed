@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RToolShed</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -132,14 +132,14 @@
     <p>Write an R dataframe to Hive</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_df_to_hive</span>(<span class='no'>df</span>, <span class='no'>id</span>, <span class='no'>server</span>, <span class='no'>schema_table</span>)</pre>
+    <pre class="usage"><span class='fu'>write_df_to_hive</span>(<span class='no'>df</span>, <span class='no'>id</span>, <span class='no'>server</span>, <span class='no'>schema_table</span>, <span class='kw'>append_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>dataframe Dataframe to upload.</p></td>
+      <td><p>dataframe Dataframe to upload; df is converted to csv for upload.</p></td>
     </tr>
     <tr>
       <th>id</th>
@@ -152,6 +152,10 @@
     <tr>
       <th>schema_table</th>
       <td><p>string "schema.table" Name of the table to write to in Hive.</p></td>
+    </tr>
+    <tr>
+      <th>append_data</th>
+      <td><p>logical, defaults to FALSE for overwrite; TRUE appends the to the data.</p></td>
     </tr>
     </table>
 
