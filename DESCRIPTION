@@ -37,11 +37,11 @@ Imports:
     tsibble (>= 0.8.4),
     tibble (>= 1.4.2),
     tibbletime,
-    purrr
+    purrr,
+    testthat (>= 2.0.0),
 Suggests: 
     knitr (>= 1.25),
     rmarkdown (>= 1.16),
-    testthat (>= 2.0.0),
     covr,
     remotes,
     roxygen2,
