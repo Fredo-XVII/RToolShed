@@ -4,7 +4,10 @@
     - removed static path to write to and replaced with code that will build and delete a new directory where the dataframe will be saved on the server. Updated docs.  
     - replace `file` with `csv_file` so that it conforms with `write_csv_to_hive()`
   - `write_csv_to_hive()`: removed static path to write to and replaced with code that will build and delete a new directory where the dataframe will be saved on the server. Update docs.
-  
+  - `test_na`: fixed issues in import to importFrom  
+
+* Feature Request:
+  - Parameter: add parameter to the `write_to_*` functions that will allow appending instead of overwrite.  The default will remain overwrite.
 
 # RToolShed 0.1.4
 
