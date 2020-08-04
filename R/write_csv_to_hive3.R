@@ -82,13 +82,6 @@ write_csv_to_hive <- function(csv_file,
 
 
   # Step #1: build external table ---------------------------------------------
-  # Append or not Append, that is the question
-  append_script <- if (append_data == TRUE) {
-    ' INTO TABLE '
-  } else {
-    ' OVERWRITE INTO TABLE '
-  }
-
   query_external <- dplyr::sql(paste0(
     "hive -e ",
     "'CREATE EXTERNAL TABLE IF NOT EXISTS ", schema_table_stg, " (\n",
@@ -134,9 +127,18 @@ write_csv_to_hive <- function(csv_file,
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_managed)))
 
   # load managed table with staged external table
+  # Append or not Append, that is the question
+  append_script <- if (append_data == TRUE) {
+    ' INSERT INTO TABLE '
+  } else {
+    ' INSERT OVERWRITE TABLE '
+  }
+
   load_managed <- dplyr::sql(paste0(
     "hive -e ",
-    "'insert into ", schema_table,
+    #"'insert into table ", schema_table,
+    #"'insert overwrite table ", schema_table,
+    "'", append_script, schema_table,
     " \n select * from ", schema_table_stg,";'"
   ))
 
@@ -150,7 +152,7 @@ write_csv_to_hive <- function(csv_file,
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_rm_stg)))
 
   # Disconnect and rm password and csv file from hadoop
-  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',hdfs_dir))) # rm -rf dirname
+  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',edge_dir))) # rm -rf dirname
   ssh::ssh_disconnect(session)
   rm(.pwd)
 }
