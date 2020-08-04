@@ -36,8 +36,8 @@
 #' @import askpass
 #' @export
 
-write_csv_to_hive <- function(csv_file,
-                              csv_name,
+write_csv_to_hive3 <- function(csv_name,
+                              csv_file = ".",
                               id,
                               server,
                               #schema_table,
