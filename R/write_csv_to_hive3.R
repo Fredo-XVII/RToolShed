@@ -72,7 +72,7 @@ write_csv_to_hive <- function(csv_file, id, server,
   ssh::scp_upload(session, csv_file, to = edge_dir)
 
   # prep hdfs and copy csv file to hdfs from edge node : hdfs dfs -mkdir /user/z001c9v/folder
-  hdfs_dir <- paste0(file.path("/user",toupper(id),"hive",table),"/") # "/", # 'hdfs://bigredns','user'
+  hdfs_dir <- paste0(file.path('hdfs://bigred3ns',"user",toupper(id),"hive",table),"/") # "/", # 'hdfs://bigred3ns','user'
   ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -mkdir',hdfs_dir))) # if append, then mkdir optional
   #hdfs dfs -put <local path> <hdfs path>
   ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -put',edge_dir,hdfs_dir)))
