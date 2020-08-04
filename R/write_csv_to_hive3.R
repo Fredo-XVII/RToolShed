@@ -36,14 +36,17 @@
 #' @import askpass
 #' @export
 
-write_csv_to_hive <- function(csv_file, id, server,
+write_csv_to_hive <- function(csv_file,
+                              csv_name,
+                              id,
+                              server,
                               #schema_table,
                               schema,
                               table,
                               append_data = FALSE) {
 
   # buil parameters
-  schema_table <- paste0(schema,".",table) # Managed Table
+  schema_table <- paste0(tolower(schema),".",table) # Managed Table
   schema_table_stg <- paste0(schema_table,"_stg") # External Table
 
   # get gassword and set csv file name
@@ -65,7 +68,7 @@ write_csv_to_hive <- function(csv_file, id, server,
   session <- ssh::ssh_connect(login, passwd = .pwd)
 
   # make directory for SCP to edge node
-  edge_dir <- sprintf("/home_dir/%s/write_csv_to_hive/",tolower(id)) # hdfs_dir
+  edge_dir <- sprintf("/home_dir/%s/write_csv_to_hive",tolower(id)) # hdfs_dir
   ssh::ssh_exec_wait(session, command = c(paste('mkdir',edge_dir)))
 
   # upload csv file
@@ -75,7 +78,7 @@ write_csv_to_hive <- function(csv_file, id, server,
   hdfs_dir <- paste0(file.path('hdfs://bigred3ns',"user",toupper(id),"hive",table),"/") # "/", # 'hdfs://bigred3ns','user'
   ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -mkdir',hdfs_dir))) # if append, then mkdir optional
   #hdfs dfs -put <local path> <hdfs path>
-  ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -put',edge_dir,hdfs_dir)))
+  ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -put -f',file.path(edge_dir,csv_name),hdfs_dir)))
 
 
   # Step #1: build external table ---------------------------------------------
@@ -88,7 +91,7 @@ write_csv_to_hive <- function(csv_file, id, server,
 
   query_external <- dplyr::sql(paste0(
     "hive -e ",
-    "'CREATE EXTERNAL TABLE IF NOT EXISTS IF NOT EXISTS ", schema_table_stg, " (\n",
+    "'CREATE EXTERNAL TABLE IF NOT EXISTS ", schema_table_stg, " (\n",
     cols_for_hive,
     ') COMMENT "TABLE CREATED BY R CODE" \n',
     'ROW FORMAT DELIMITED
@@ -96,36 +99,53 @@ write_csv_to_hive <- function(csv_file, id, server,
     STORED AS TEXTFILE ',
     #'tblproperties ("skip.header.line.count"="1");',
     #"\n LOAD DATA LOCAL INPATH ",
-    "\n LOCATON ",
-    '"',hdfs_dir,'"',
+    "\n LOCATION ",
+    '"',file.path('',"user",toupper(id),"hive",table),'/"',
+    #'"',hdfs_dir,'"',
     #'"',' OVERWRITE INTO TABLE ',
     #schema_table_stg,
+    '\n tblproperties ("skip.header.line.count"="1")',
     ";'"
   ))
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_external)))
 
+  #ssh::ssh_exec_wait(session, command = c("hdfs dfs -ls hdfs://user/z001c9v/"))
+  #ssh::ssh_session_info(session)
+
   # Step #2: build/append to the manage table ---------------------------------
+  # build managed table schema
   query_managed <- dplyr::sql(paste0(
     "hive -e ",
     "'create table if not exists ", schema_table, " (\n",
     cols_for_hive,
     ') COMMENT "TABLE CREATED BY R CODE" \n',
-    'ROW FORMAT DELIMITED
-    FIELDS TERMINATED BY ","
-    STORED AS TEXTFILE ',
-    'tblproperties ("skip.header.line.count"="1");',
-    "\n LOAD DATA LOCAL INPATH ",
-    '"',hdfs_dir,
-    '"',append_script,
-    schema_table,
+    #'ROW FORMAT DELIMITED
+    #FIELDS TERMINATED BY ","
+    #STORED AS TEXTFILE ',
+    #'tblproperties ("skip.header.line.count"="1");',
+    #"\n LOAD DATA LOCAL INPATH ",
+    #'"',hdfs_dir,
+    #'"',append_script,
+    #schema_table,
     ";'"
   ))
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_managed)))
 
+  # load managed table with staged external table
+  load_managed <- dplyr::sql(paste0(
+    "hive -e ",
+    "'insert into ", schema_table,
+    " \n select * from ", schema_table_stg,";'"
+  ))
+
+  ssh::ssh_exec_wait(session, command = c(dplyr::sql(load_managed)))
+
   # Step #3: clean up query, remove stage table -------------------------------
-  query_rm_stg <- sprintf("hive -e drop table %s;", schema_table_stg)
+  query_rm_stg <- dplyr::sql(
+    sprintf("hive -e 'drop table %s;'", schema_table_stg)
+  )
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_rm_stg)))
 
@@ -134,3 +154,8 @@ write_csv_to_hive <- function(csv_file, id, server,
   ssh::ssh_disconnect(session)
   rm(.pwd)
 }
+
+
+# locations in hdfs
+#managed table location: hdfs://bigred3ns/warehouse/tablespace/managed/hive/z001c9v.db/seatbelts
+# hdfs://bigred3ns/user/Z001C9V/hive/seatbelts
