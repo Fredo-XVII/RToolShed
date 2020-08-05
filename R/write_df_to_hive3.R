@@ -1,4 +1,4 @@
-#' @title Write a CSV file to Hive 3
+#' @title Write a df file to Hive 3
 #'
 #' @details
 #' Uploads a CSV file, uploads it to Hive, and creates a managed table. The
@@ -6,6 +6,7 @@
 #' home location.  This assumes that when you log into Hive/Hadoop, the login
 #' is similar to `XXXXX@edge.hadoop.co.com`
 #'
+#' @oaram df must be a dataframe/tibble
 #' @param csv_name string name of the file with .csv extension
 #' @param csv_folder string path to folder where CSV file is stored. Defaults to current
 #' working directory represented by ".". Do not place a "/" at the end of the path.
@@ -47,23 +48,27 @@
 #' @import askpass
 #' @export
 
-write_csv_to_hive3 <- function(csv_name,csv_folder = ".",
-                              id,
-                              schema,
-                              table,
-                              server,
-                              append_data = FALSE) {
+write_df_to_hive3 <- function(df,
+                              #csv_name,
+                              #csv_folder = ".",
+                               id,
+                               schema,
+                               table,
+                               server,
+                               append_data = FALSE) {
 
   # build parameters for table names
   schema_table <- paste0(tolower(schema),".",table) # Managed Table
   schema_table_stg <- paste0(schema_table,"_stg") # External Table
+  csv_name <- paste0(substitute(df),".csv")
+  csv_folder <- "."
   csv_file <- file.path(csv_folder,csv_name) # Build path to file
 
   # get gassword and set csv file name
   .pwd <- askpass::askpass('password')
 
   # build metadata
-  df <- readr::read_csv(file = csv_file)
+  readr::write_csv(df, csv_file)
   col_names <- names(df)
   col_types <- sapply(df, class)
   schema_df <- data.frame(col_names, col_types) %>%
@@ -73,12 +78,12 @@ write_csv_to_hive3 <- function(csv_name,csv_folder = ".",
                                                     TRUE ~ 'STRING'))
   cols_for_hive <- paste(schema_df$col_names, " ", schema_df$hive_col_types, collapse = ",\n")
 
-  # ssh to hive
+  # ssh to hive ---------------------------------------------------------------
   login <- paste0(toupper(id),'@',server)
   session <- ssh::ssh_connect(login, passwd = .pwd)
 
   # make directory for SCP to edge node
-  edge_dir <- sprintf("/home_dir/%s/write_csv_to_hive",tolower(id))
+  edge_dir <- sprintf("/home_dir/%s/write_df_to_hive",tolower(id))
   ssh::ssh_exec_wait(session, command = c(paste('mkdir',edge_dir)))
 
   # upload csv file to edge node
