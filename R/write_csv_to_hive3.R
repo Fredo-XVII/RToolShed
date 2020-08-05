@@ -1,16 +1,20 @@
 #' @title Write a CSV file to Hive 3
 #'
 #' @details
-#' Uploads a CSV file and uploads it to Hive.  This assumes that when you log into
-#' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
+#' Uploads a CSV file, uploads it to Hive, and creates a managed table. The
+#' function also cleans up the csv file on the edge node and in the users' hdfs
+#' home location.  This assumes that when you log into Hive/Hadoop, the login
+#' is similar to `XXXXX@edge.hadoop.co.com`
 #'
-#' @param csv_file path to CSV file to upload, if only the name of file is provided,
-#' then it is assumed the file is in the current working directory reported by
-#' getwd(); see dplyr::read_csv documentation for further information.
-#' @param id string ID of user. `.pwd` will be requested from the user at function call.
+#' @param csv_name string name of the file with .csv extension
+#' @param csv_folder string path to folder where CSV file is stored. Defaults to current
+#' working directory represented by ".". Do not place a "/" at the end of the path.
+#' @param id string ID of user. Password will be requested at function call.
+#' @param schema string schema name in hive
+#' @param table string name for the table in hive.  One will be created if not exists.
 #' @param server string server extention or path
-#' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
+#'
 #' @return Does not return anything.
 #'
 #' @examples
@@ -20,13 +24,20 @@
 #' library(readr)
 #' library(rstudioapi)
 #' library(magrittr)
-#' df <- mtcars
-#' zid <- 'XXXXX'
+#'
+#' csv_name <- 'file.csv'
+#' csv_folder <- getwd()
+#' id <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
-#' schema_table <- 'schema.table'
-#' .pwd <- askpass::askpass('password')
-#' file <- c('table_for_hive.csv')
-#' write_csv_to_hive(csv_file = file, id = zid, server = server, schema_table = schema_table)
+#' schema <- 'schema'
+#' table <- 'table'
+#' write_csv_to_hive3(csv_name = csv_name,
+#'                    csv_folder = csv_folder,
+#'                    id = id,
+#'                    schema = schema,
+#'                    table = table,
+#'                    server = server,
+#'                    append_data = FALSE)
 #' }
 #'
 #' @importFrom magrittr %>%
@@ -37,17 +48,17 @@
 #' @export
 
 write_csv_to_hive3 <- function(csv_name,
-                              csv_file = ".",
+                              csv_folder = ".",
                               id,
-                              server,
-                              #schema_table,
                               schema,
                               table,
+                              server,
                               append_data = FALSE) {
 
-  # buil parameters
+  # buil parameters for table names
   schema_table <- paste0(tolower(schema),".",table) # Managed Table
   schema_table_stg <- paste0(schema_table,"_stg") # External Table
+  csv_file <- file.path(csv_folder,csv_name) # Build path to file
 
   # get gassword and set csv file name
   .pwd <- askpass::askpass('password')
@@ -68,16 +79,18 @@ write_csv_to_hive3 <- function(csv_name,
   session <- ssh::ssh_connect(login, passwd = .pwd)
 
   # make directory for SCP to edge node
-  edge_dir <- sprintf("/home_dir/%s/write_csv_to_hive",tolower(id)) # hdfs_dir
+  edge_dir <- sprintf("/home_dir/%s/write_csv_to_hive",tolower(id))
   ssh::ssh_exec_wait(session, command = c(paste('mkdir',edge_dir)))
 
-  # upload csv file
+  # upload csv file to edge node
   ssh::scp_upload(session, csv_file, to = edge_dir)
 
-  # prep hdfs and copy csv file to hdfs from edge node : hdfs dfs -mkdir /user/z001c9v/folder
-  hdfs_dir <- paste0(file.path('hdfs://bigred3ns',"user",toupper(id),"hive",table),"/") # "/", # 'hdfs://bigred3ns','user'
-  ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -mkdir',hdfs_dir))) # if append, then mkdir optional
-  #hdfs dfs -put <local path> <hdfs path>
+  # prep hdfs and copy csv file to hdfs from edge node:
+  # hdfs dfs -put -f <local path> <hdfs path> <=> moves file to folder
+  ssh::ssh_exec_wait(session, command = c('hdfs getconf -confKey fs.defaultFS'), std_out = './name_node.txt')
+  name_node <- read_file('./name_node.txt') %>% stringr::str_replace("\n","")
+  hdfs_dir <- paste0(file.path(name_node,"user",toupper(id),"hive",table),"/")
+  ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -mkdir',hdfs_dir)))
   ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -put -f',file.path(edge_dir,csv_name),hdfs_dir)))
 
 
@@ -103,10 +116,7 @@ write_csv_to_hive3 <- function(csv_name,
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_external)))
 
-  #ssh::ssh_exec_wait(session, command = c("hdfs dfs -ls hdfs://user/z001c9v/"))
-  #ssh::ssh_session_info(session)
-
-  # Step #2: build/append to the manage table ---------------------------------
+  # Step #2: build the manage table ---------------------------------
   # build managed table schema
   query_managed <- dplyr::sql(paste0(
     "hive -e ",
@@ -126,8 +136,8 @@ write_csv_to_hive3 <- function(csv_name,
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_managed)))
 
-  # load managed table with staged external table
-  # Append or not Append, that is the question
+  # overwrite/append managed table with data from staged external table
+  # append or not append, that is the question
   append_script <- if (append_data == TRUE) {
     ' INSERT INTO TABLE '
   } else {
@@ -144,20 +154,19 @@ write_csv_to_hive3 <- function(csv_name,
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(load_managed)))
 
-  # Step #3: clean up query, remove stage table -------------------------------
+  # Step #3: clean up  --------------------------------------------------------
+  # remove stage table and external file
   query_rm_stg <- dplyr::sql(
     sprintf("hive -e 'drop table %s;'", schema_table_stg)
   )
 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query_rm_stg)))
+  ssh::ssh_exec_wait(session, command = c(paste('hdfs dfs -rm -r',hdfs_dir)))
 
-  # Disconnect and rm password and csv file from hadoop
-  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',edge_dir))) # rm -rf dirname
+  # Disconnect and rm password and csv file from edge node
+  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',edge_dir)))
   ssh::ssh_disconnect(session)
+  file.remove('./name_node.txt')
   rm(.pwd)
 }
 
-
-# locations in hdfs
-#managed table location: hdfs://bigred3ns/warehouse/tablespace/managed/hive/z001c9v.db/seatbelts
-# hdfs://bigred3ns/user/Z001C9V/hive/seatbelts
