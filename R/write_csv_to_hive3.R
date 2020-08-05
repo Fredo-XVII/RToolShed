@@ -1,19 +1,21 @@
 #' @title Write a CSV file to Hive 3
 #'
-#' @details
-#' Uploads a CSV file, uploads it to Hive, and creates a managed table. The
-#' function also cleans up the csv file on the edge node and in the users' hdfs
-#' home location.  This assumes that when you log into Hive/Hadoop, the login
-#' is similar to `XXXXX@edge.hadoop.co.com`
+#' @details Uploads a CSV file to the edge node, uploads it to Hive, and creates
+#' a managed table. The function also cleans up the csv file on the edge node
+#' and in the users' hdfs home location.  This assumes that when you log into
+#' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com`
 #'
 #' @param csv_name string name of the file with .csv extension
-#' @param csv_folder string path to folder where CSV file is stored. Defaults to current
-#' working directory represented by ".". Do not place a "/" at the end of the path.
+#' @param csv_folder string path to folder where CSV file is stored. Defaults to
+#'   current working directory represented by ".". Do not place a "/" at the end
+#'   of the path.
 #' @param id string ID of user. Password will be requested at function call.
 #' @param schema string schema name in hive
-#' @param table string name for the table in hive.  One will be created if not exists.
+#' @param table string name for the table in hive.  One will be created if not
+#'   exists.
 #' @param server string server extention or path
-#' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
+#' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the
+#'   to the data.
 #'
 #' @return Does not return anything.
 #'
