@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write an R dataframe to Hive — write_df_to_hive • RToolShed</title>
+<title>Write a CSV file to Hive 3 — write_csv_to_hive3 • RToolShed</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Write an R dataframe to Hive — write_df_to_hive" />
-<meta property="og:description" content="Write an R dataframe to Hive" />
+<meta property="og:title" content="Write a CSV file to Hive 3 — write_csv_to_hive3" />
+<meta property="og:description" content="Write a CSV file to Hive 3" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,39 +123,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write an R dataframe to Hive</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Fredo-XVII/RToolShed/blob/master/R/write_df_to_hive.R'><code>R/write_df_to_hive.R</code></a></small>
-    <div class="hidden name"><code>write_df_to_hive.Rd</code></div>
+    <h1>Write a CSV file to Hive 3</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Fredo-XVII/RToolShed/blob/master/R/write_csv_to_hive3.R'><code>R/write_csv_to_hive3.R</code></a></small>
+    <div class="hidden name"><code>write_csv_to_hive3.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Write an R dataframe to Hive</p>
+    <p>Write a CSV file to Hive 3</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_df_to_hive</span>(<span class='no'>df</span>, <span class='no'>id</span>, <span class='no'>server</span>, <span class='no'>schema_table</span>, <span class='kw'>append_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>write_csv_to_hive3</span>(
+  <span class='no'>csv_name</span>,
+  <span class='kw'>csv_folder</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='no'>id</span>,
+  <span class='no'>schema</span>,
+  <span class='no'>table</span>,
+  <span class='no'>server</span>,
+  <span class='kw'>append_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>dataframe Dataframe to upload; df is converted to csv for upload.</p></td>
+      <th>csv_name</th>
+      <td><p>string name of the file with .csv extension</p></td>
+    </tr>
+    <tr>
+      <th>csv_folder</th>
+      <td><p>string path to folder where CSV file is stored. Defaults to
+current working directory represented by ".". Do not place a "/" at the end
+of the path.</p></td>
     </tr>
     <tr>
       <th>id</th>
-      <td><p>string ID of user. Password will be requested from the user at function call.</p></td>
+      <td><p>string ID of user. Password will be requested at function call.</p></td>
+    </tr>
+    <tr>
+      <th>schema</th>
+      <td><p>string schema name in hive</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>string name for the table in hive.  One will be created if not
+exists.</p></td>
     </tr>
     <tr>
       <th>server</th>
       <td><p>string server extention or path</p></td>
     </tr>
     <tr>
-      <th>schema_table</th>
-      <td><p>string "schema.table" Name of the table to write to in Hive.</p></td>
-    </tr>
-    <tr>
       <th>append_data</th>
-      <td><p>logical, defaults to FALSE for overwrite; TRUE appends the to the data.</p></td>
+      <td><p>logical, defaults to FALSE for overwrite; TRUE appends the
+to the data.</p></td>
     </tr>
     </table>
 
@@ -164,8 +184,10 @@
     <p>Does not return anything.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Uploads an R dataframe and uploads it to Hive.  This assumes that when you log into
-Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``</p>
+    <p>Uploads a CSV file to the edge node, uploads it to Hive, and creates
+a managed table. The function also cleans up the csv file on the edge node
+and in the users' hdfs home location.  This assumes that when you log into
+Hive/Hadoop, the login is similar to <code>XXXXX@edge.hadoop.co.com</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -173,11 +195,21 @@ Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``</p>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>readr</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>rstudioapi</span>)
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
-<span class='no'>zid</span> <span class='kw'>&lt;-</span> <span class='st'>'XXXXX'</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>magrittr</span>)
+
+<span class='no'>csv_name</span> <span class='kw'>&lt;-</span> <span class='st'>'file.csv'</span>
+<span class='no'>csv_folder</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span>()
+<span class='no'>id</span> <span class='kw'>&lt;-</span> <span class='st'>'XXXXX'</span>
 <span class='no'>server</span> <span class='kw'>&lt;-</span> <span class='st'>'edge.hadoop.co.com'</span>
-<span class='no'>schema_table</span> <span class='kw'>&lt;-</span> <span class='st'>'schema.table'</span>
-<span class='fu'>write_df_to_hive</span>(<span class='kw'>df</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>zid</span>, <span class='kw'>server</span> <span class='kw'>=</span> <span class='no'>server</span>, <span class='kw'>schema_table</span> <span class='kw'>=</span> <span class='no'>schema_table</span>)
+<span class='no'>schema</span> <span class='kw'>&lt;-</span> <span class='st'>'schema'</span>
+<span class='no'>table</span> <span class='kw'>&lt;-</span> <span class='st'>'table'</span>
+<span class='fu'>write_csv_to_hive3</span>(<span class='kw'>csv_name</span> <span class='kw'>=</span> <span class='no'>csv_name</span>,
+                   <span class='kw'>csv_folder</span> <span class='kw'>=</span> <span class='no'>csv_folder</span>,
+                   <span class='kw'>id</span> <span class='kw'>=</span> <span class='no'>id</span>,
+                   <span class='kw'>schema</span> <span class='kw'>=</span> <span class='no'>schema</span>,
+                   <span class='kw'>table</span> <span class='kw'>=</span> <span class='no'>table</span>,
+                   <span class='kw'>server</span> <span class='kw'>=</span> <span class='no'>server</span>,
+                   <span class='kw'>append_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

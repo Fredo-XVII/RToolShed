@@ -1,4 +1,9 @@
 # RToolShed 0.1.5
+
+* New functions:
+  - `write_df_to_hive3()`: upload a dataframe to hive 3 as a managed table. All side effects removed at the end of the function call.
+  - `write_csv_to_hive3()`: upload a dataframe to hive 3 as a managed table. All side effects removed at the end of the function call.
+  
 * Bug fix:
   - `write_df_to_hive()`: 
     - removed static path to write to and replaced with code that will build and delete a new directory where the dataframe will be saved on the server. Updated docs.  

@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_df_to_hive3.R
 \name{write_df_to_hive3}
 \alias{write_df_to_hive3}
-\title{Write a df file to Hive 3}
+\title{Write a Dataframe to Hive 3}
 \usage{
 write_df_to_hive3(df, id, schema, table, server, append_data = FALSE)
 }
@@ -25,7 +25,7 @@ to the data.}
 Does not return anything.
 }
 \description{
-Write a df file to Hive 3
+Write a Dataframe to Hive 3
 }
 \details{
 Uploads an R dataframe to the edge node as a CSV, uploads it to
@@ -42,7 +42,7 @@ library(readr)
 library(rstudioapi)
 library(magrittr)
 
-df <- Seatbelts \%>\% as.data.frame()
+df <- as.data.frame(Seatbelts)
 id <- 'XXXXX'
 server <- 'edge.hadoop.co.com'
 schema <- 'schema'

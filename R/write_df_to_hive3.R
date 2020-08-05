@@ -1,4 +1,4 @@
-#' @title Write a df file to Hive 3
+#' @title Write a Dataframe to Hive 3
 #'
 #' @details Uploads an R dataframe to the edge node as a CSV, uploads it to
 #' Hive, and creates a managed table. The function also cleans up the csv file
@@ -25,7 +25,7 @@
 #' library(rstudioapi)
 #' library(magrittr)
 #'
-#' df <- Seatbelts %>% as.data.frame()
+#' df <- as.data.frame(Seatbelts)
 #' id <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
 #' schema <- 'schema'
@@ -46,11 +46,11 @@
 #' @export
 
 write_df_to_hive3 <- function(df,
-                               id,
-                               schema,
-                               table,
-                               server,
-                               append_data = FALSE) {
+                              id,
+                              schema,
+                              table,
+                              server,
+                              append_data = FALSE) {
 
   # build parameters for table names
   schema_table <- paste0(tolower(schema),".",table) # Managed Table
@@ -151,6 +151,7 @@ write_df_to_hive3 <- function(df,
   ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',edge_dir)))
   ssh::ssh_disconnect(session)
   file.remove('./name_node.txt')
+  file.remove(sprintf('./%s',csv_file))
   rm(.pwd)
 }
 
