@@ -5,7 +5,7 @@
 #' Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 #'
 #' @param df dataframe Dataframe to upload; df is converted to csv for upload.
-#' @param id string ID of user. `.pwd` will be requested from the user at function call.
+#' @param id string ID of user. Password will be requested from the user at function call.
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
@@ -21,7 +21,6 @@
 #' zid <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
 #' schema_table <- 'schema.table'
-#' .pwd <- askpass::askpass('password')
 #' write_df_to_hive(df = df, id = zid, server = server, schema_table = schema_table)
 #' }
 #'
@@ -86,7 +85,7 @@ write_df_to_hive <- function(df, id, server, schema_table, append_data = FALSE) 
   ssh::ssh_exec_wait(session, command = c(dplyr::sql(query)))
 
   # Disconnect and rm password and csv file from hadoop and local.
-  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',hdfs_dir))) # rm -rf dirname
+  ssh::ssh_exec_wait(session, command = c(sprintf('rm -rf %s',hdfs_dir)))
   ssh::ssh_disconnect(session)
   rm(.pwd)
   file.remove(sprintf('./%s',csv_file))
