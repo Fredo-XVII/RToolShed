@@ -17,18 +17,21 @@ write_csv_to_hive3(
 \arguments{
 \item{csv_name}{string name of the file with .csv extension}
 
-\item{csv_folder}{string path to folder where CSV file is stored. Defaults to current
-working directory represented by ".". Do not place a "/" at the end of the path.}
+\item{csv_folder}{string path to folder where CSV file is stored. Defaults to
+current working directory represented by ".". Do not place a "/" at the end
+of the path.}
 
 \item{id}{string ID of user. Password will be requested at function call.}
 
 \item{schema}{string schema name in hive}
 
-\item{table}{string name for the table in hive.  One will be created if not exists.}
+\item{table}{string name for the table in hive.  One will be created if not
+exists.}
 
 \item{server}{string server extention or path}
 
-\item{append_data}{logical, defaults to FALSE for overwrite; TRUE appends the to the data.}
+\item{append_data}{logical, defaults to FALSE for overwrite; TRUE appends the
+to the data.}
 }
 \value{
 Does not return anything.
@@ -37,10 +40,10 @@ Does not return anything.
 Write a CSV file to Hive 3
 }
 \details{
-Uploads a CSV file, uploads it to Hive, and creates a managed table. The
-function also cleans up the csv file on the edge node and in the users' hdfs
-home location.  This assumes that when you log into Hive/Hadoop, the login
-is similar to \code{XXXXX@edge.hadoop.co.com}
+Uploads a CSV file to the edge node, uploads it to Hive, and creates
+a managed table. The function also cleans up the csv file on the edge node
+and in the users' hdfs home location.  This assumes that when you log into
+Hive/Hadoop, the login is similar to \code{XXXXX@edge.hadoop.co.com}
 }
 \examples{
 \dontrun{

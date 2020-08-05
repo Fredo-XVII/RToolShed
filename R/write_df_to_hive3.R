@@ -1,20 +1,19 @@
 #' @title Write a df file to Hive 3
 #'
-#' @details
-#' Uploads a CSV file, uploads it to Hive, and creates a managed table. The
-#' function also cleans up the csv file on the edge node and in the users' hdfs
-#' home location.  This assumes that when you log into Hive/Hadoop, the login
-#' is similar to `XXXXX@edge.hadoop.co.com`
+#' @details Uploads an R dataframe to the edge node as a CSV, uploads it to
+#' Hive, and creates a managed table. The function also cleans up the csv file
+#' on the edge node and in the users' hdfs home location.  This assumes that
+#' when you log into Hive/Hadoop, the login is similar to
+#' `XXXXX@edge.hadoop.co.com`
 #'
-#' @oaram df must be a dataframe/tibble
-#' @param csv_name string name of the file with .csv extension
-#' @param csv_folder string path to folder where CSV file is stored. Defaults to current
-#' working directory represented by ".". Do not place a "/" at the end of the path.
+#' @param df must be a dataframe/tibble
 #' @param id string ID of user. Password will be requested at function call.
 #' @param schema string schema name in hive
-#' @param table string name for the table in hive.  One will be created if not exists.
+#' @param table string name for the table in hive.  One will be created if not
+#'   exists.
 #' @param server string server extention or path
-#' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
+#' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the
+#'   to the data.
 #'
 #' @return Does not return anything.
 #'
@@ -26,14 +25,12 @@
 #' library(rstudioapi)
 #' library(magrittr)
 #'
-#' csv_name <- 'file.csv'
-#' csv_folder <- getwd()
+#' df <- Seatbelts %>% as.data.frame()
 #' id <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
 #' schema <- 'schema'
 #' table <- 'table'
-#' write_csv_to_hive3(csv_name = csv_name,
-#'                    csv_folder = csv_folder,
+#' write_df_to_hive3(df =
 #'                    id = id,
 #'                    schema = schema,
 #'                    table = table,
@@ -49,8 +46,6 @@
 #' @export
 
 write_df_to_hive3 <- function(df,
-                              #csv_name,
-                              #csv_folder = ".",
                                id,
                                schema,
                                table,
