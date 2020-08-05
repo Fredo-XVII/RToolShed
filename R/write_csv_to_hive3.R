@@ -47,8 +47,7 @@
 #' @import askpass
 #' @export
 
-write_csv_to_hive3 <- function(csv_name,
-                              csv_folder = ".",
+write_csv_to_hive3 <- function(csv_name,csv_folder = ".",
                               id,
                               schema,
                               table,
@@ -103,13 +102,8 @@ write_csv_to_hive3 <- function(csv_name,
     'ROW FORMAT DELIMITED
     FIELDS TERMINATED BY ","
     STORED AS TEXTFILE ',
-    #'tblproperties ("skip.header.line.count"="1");',
-    #"\n LOAD DATA LOCAL INPATH ",
     "\n LOCATION ",
     '"',file.path('',"user",toupper(id),"hive",table),'/"',
-    #'"',hdfs_dir,'"',
-    #'"',' OVERWRITE INTO TABLE ',
-    #schema_table_stg,
     '\n tblproperties ("skip.header.line.count"="1")',
     ";'"
   ))
@@ -123,14 +117,6 @@ write_csv_to_hive3 <- function(csv_name,
     "'create table if not exists ", schema_table, " (\n",
     cols_for_hive,
     ') COMMENT "TABLE CREATED BY R CODE" \n',
-    #'ROW FORMAT DELIMITED
-    #FIELDS TERMINATED BY ","
-    #STORED AS TEXTFILE ',
-    #'tblproperties ("skip.header.line.count"="1");',
-    #"\n LOAD DATA LOCAL INPATH ",
-    #'"',hdfs_dir,
-    #'"',append_script,
-    #schema_table,
     ";'"
   ))
 
@@ -146,8 +132,6 @@ write_csv_to_hive3 <- function(csv_name,
 
   load_managed <- dplyr::sql(paste0(
     "hive -e ",
-    #"'insert into table ", schema_table,
-    #"'insert overwrite table ", schema_table,
     "'", append_script, schema_table,
     " \n select * from ", schema_table_stg,";'"
   ))
