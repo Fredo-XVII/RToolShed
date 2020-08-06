@@ -16,7 +16,7 @@
 #' library(ssh)
 #' library(dplyr)
 #' library(readr)
-#' library(rstudioapi)
+#' library(askpass)
 #' df <- mtcars
 #' zid <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'

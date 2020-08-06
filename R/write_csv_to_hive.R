@@ -7,7 +7,7 @@
 #' @param csv_file path to CSV file to upload, if only the name of file is provided,
 #' then it is assumed the file is in the current working directory reported by
 #' getwd(); see dplyr::read_csv documentation for further information.
-#' @param id string ID of user. `.pwd` will be requested from the user at function call.
+#' @param id string ID of user. Password will be requested from the user at function call.
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
@@ -18,13 +18,12 @@
 #' library(ssh)
 #' library(dplyr)
 #' library(readr)
-#' library(rstudioapi)
+#' library(askpass)
 #' library(magrittr)
 #' df <- mtcars
 #' zid <- 'XXXXX'
 #' server <- 'edge.hadoop.co.com'
 #' schema_table <- 'schema.table'
-#' .pwd <- askpass::askpass('password')
 #' file <- c('table_for_hive.csv')
 #' write_csv_to_hive(csv_file = file, id = zid, server = server, schema_table = schema_table)
 #' }
