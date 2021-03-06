@@ -39,7 +39,7 @@ when you log into Hive/Hadoop, the login is similar to
 library(ssh)
 library(dplyr)
 library(readr)
-library(rstudioapi)
+library(askpass)
 library(magrittr)
 
 df <- as.data.frame(Seatbelts)

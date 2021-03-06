@@ -50,7 +50,7 @@ Hive/Hadoop, the login is similar to \code{XXXXX@edge.hadoop.co.com}
 library(ssh)
 library(dplyr)
 library(readr)
-library(rstudioapi)
+library(askpass)
 library(magrittr)
 
 csv_name <- 'file.csv'

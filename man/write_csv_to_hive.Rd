@@ -11,7 +11,7 @@ write_csv_to_hive(csv_file, id, server, schema_table, append_data = FALSE)
 then it is assumed the file is in the current working directory reported by
 getwd(); see dplyr::read_csv documentation for further information.}
 
-\item{id}{string ID of user. \code{.pwd} will be requested from the user at function call.}
+\item{id}{string ID of user. Password will be requested from the user at function call.}
 
 \item{server}{string server extention or path}
 
@@ -34,13 +34,12 @@ Hive/Hadoop, the login is similar to `XXXXX@edge.hadoop.co.com``
 library(ssh)
 library(dplyr)
 library(readr)
-library(rstudioapi)
+library(askpass)
 library(magrittr)
 df <- mtcars
 zid <- 'XXXXX'
 server <- 'edge.hadoop.co.com'
 schema_table <- 'schema.table'
-.pwd <- askpass::askpass('password')
 file <- c('table_for_hive.csv')
 write_csv_to_hive(csv_file = file, id = zid, server = server, schema_table = schema_table)
 }
