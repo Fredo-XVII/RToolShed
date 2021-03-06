@@ -8,3 +8,4 @@
 ^pkg_dev$
 ^\.Rhistory$
 ^appveyor\.yml$
+^\.github$
