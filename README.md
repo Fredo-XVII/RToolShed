@@ -7,7 +7,8 @@
 
 <!-- badges: start -->
 
-![](https://travis-ci.org/Fredo-XVII/RToolShed.svg?branch=master)
+[![R build
+status](https://github.com/Fredo-XVII/RToolShed/workflows/R-CMD-check/badge.svg)](https://github.com/Fredo-XVII/RToolShed/actions)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/Fredo-XVII/RToolShed?branch=master&svg=true)](https://ci.appveyor.com/project/Fredo-XVII/RToolShed)
 <!-- badges: end -->
