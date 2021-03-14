@@ -1,4 +1,4 @@
-#' Create Primary Indexes for Postgres Table
+#' Create Primary Keys for Postgres Table
 #'
 #' Description
 #'
@@ -6,9 +6,9 @@
 #' The list of primary keys can simply be "var1,var2,var3" because this will be
 #' inserted into an SQL statement that will be sent to the server.
 #'
-#' @param table_name string Postgres table name.
-#' @param schema_name string Posgres schema name.
-#' @param primary_keys string list of primary keys.
+#' @param table_name character Postgres table name.
+#' @param schema_name character Posgres schema name.
+#' @param primary_keys character list of primary keys.
 #' @param pg_conn connection string Postgres connection pointer/string (PqConnection)
 #' created from RPostgres::Postgres(). JDBC connections will break this function.
 #'
@@ -16,12 +16,11 @@
 #' out from RPostgres.  Check the table metadata in Postgres server to check primary
 #' key build.
 #'
-#' @import rlang
 #' @import dplyr
 #' @import RPostgres
 #' @export
 
-pgCreatePrimaryIndex <- function (pg_conn, schema_name, table_name, primary_keys = "NA") {
+pgCreatePrimaryKey <- function (pg_conn, schema_name, table_name, primary_keys = "NA") {
   # Build SQL Names
   schema_table1 <- paste0(schema_name,'.',table_name)
   schema_table2 <- paste0(schema_name,'_',table_name,"_keys")

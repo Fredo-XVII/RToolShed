@@ -39,6 +39,7 @@ to_postgres <- function(df,pg_conn,schema_name = "public",table_name, primary_ke
   if(!db_exist){
     warning("Table does not exist, building new table.")
   } else {
+    warning("Table does exist, deleting table.")
     RPostgres::dbRemoveTable(conn = pg_conn,
                              name = DBI::Id(schema = schema_name, table = table_name),
                              fail_if_missing = FALSE)
@@ -53,7 +54,7 @@ to_postgres <- function(df,pg_conn,schema_name = "public",table_name, primary_ke
   # Add keys
   if(primary_keys == "NA") { warning("Primary not specified; primary keys not set") }
   else {
-    RToolShed::pgCreatePrimaryIndex(pg_conn = pg_conn,
+    RToolShed::pgCreatePrimaryKey(pg_conn = pg_conn,
                                      table_name = table_name,
                                      schema_name = schema_name,
                                      primary_keys = primary_keys)

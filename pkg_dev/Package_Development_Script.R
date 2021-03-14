@@ -41,9 +41,11 @@ usethis::use_r("nest_it")
 usethis::use_r("prep_multidplyr")
 usethis::use_r("write_df_to_hive")
 usethis::use_r("write_csv_to_hive")
-usethis::use_r("lag_it")
-usethis::use_r("diff_it")
-
+usethis::use_r("lag_vars")
+usethis::use_r("diff_vars")
+usethis::use_r("sql_helper_functions")
+usethis::use_r("hql_helper_functions")
+usethis::use_r("pgCreateTempTable")
 
 # Add Packages
 
