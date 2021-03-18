@@ -7,12 +7,14 @@
 pgCreateTempTable(pg_conn, schema_tbl, index_cols, query)
 }
 \arguments{
-\item{pg_conn}{connection string Postgres connection pointer/string (PqConnection)
-created from RPostgres::Postgres(). JDBC connections will break this function.}
+\item{pg_conn}{connection string Postgres connection pointer/string (PqConnection)}
 
 \item{schema_tbl}{character Schema.table name.}
 
-\item{index_cols}{character expects a vector of column names...c('col1','col2','col3')}
+\item{index_cols}{character Expects a vector of column names...c('col1','col2','col3')}
+
+\item{query}{character Query string to run in database.
+created from RPostgres::Postgres(). JDBC connections will break this function.}
 }
 \value{
 The results will look like the print out below.  It is a generic print

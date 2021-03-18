@@ -7,8 +7,9 @@
 #' inserted into an SQL statement that will be sent to the server.
 #'
 #' @param schema_tbl character Schema.table name.
-#' @param index_cols character expects a vector of column names...c('col1','col2','col3')
+#' @param index_cols character Expects a vector of column names...c('col1','col2','col3')
 #' @param pg_conn connection string Postgres connection pointer/string (PqConnection)
+#' @param query character Query string to run in database.
 #' created from RPostgres::Postgres(). JDBC connections will break this function.
 #'
 #' @return The results will look like the print out below.  It is a generic print
