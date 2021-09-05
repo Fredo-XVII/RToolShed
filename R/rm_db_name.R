@@ -12,7 +12,7 @@
 #' @return A dataframe is returned with the prefix database name of the column names removed.  In the example above
 #' the new dataframe would have column names variable1, variable2...etc.
 #'
-#' @import rlang
+#' @importFrom stringr str_remove
 #' @export
 
 
@@ -20,5 +20,5 @@ rm_db_name <- function(df,db_name) {
   df_cols <- colnames(df)
   df_cols <- stringr::str_remove(df_cols,paste0(db_name,"."))
   names(df) <- df_cols
-  return(df)
+  df
 }

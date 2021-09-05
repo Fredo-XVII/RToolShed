@@ -25,7 +25,7 @@ JDBC connections will break this function.}
 \item{primary_keys}{string Fields to for primary keys, used in a SQL statement, default is NA.}
 }
 \value{
-Paste copy of output here.  You will get a generic message from RPostgres, check
+You will get a generic message from RPostgres, check
 Postgres server for the data to ensure that the data was transferred.
 }
 \description{

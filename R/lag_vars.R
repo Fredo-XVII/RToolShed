@@ -50,5 +50,5 @@ lag_vars <- function(df,col = NULL,lags = 1, mutate_type = c("mutate","trans")) 
   } else {
     out_df <- df %>% dplyr::mutate_at(dplyr::vars(!!col), dplyr::funs_(lag_functions))
   }
-  return(out_df)
+  out_df
 }

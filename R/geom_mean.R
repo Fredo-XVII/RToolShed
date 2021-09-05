@@ -23,6 +23,6 @@
 geom_mean <- function(x, roll_window = length(x)) {
   y <- c(x)*1/100 + 1
   z <- prod(c(y))^(1/roll_window) - 1
-  return(z*100)
+  z*100
 }
 

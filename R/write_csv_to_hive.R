@@ -11,6 +11,7 @@
 #' @param server string server extention or path
 #' @param schema_table string "schema.table" Name of the table to write to in Hive.
 #' @param append_data logical, defaults to FALSE for overwrite; TRUE appends the to the data.
+#'
 #' @return Does not return anything.
 #'
 #' @examples

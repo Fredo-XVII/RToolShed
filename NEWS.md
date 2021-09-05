@@ -1,3 +1,8 @@
+# RToolShed 0.1.6
+
+* Upgrade for R 4.0.5
+* Remove `return()` from functions.
+
 # RToolShed 0.1.5
 
 * New functions:
