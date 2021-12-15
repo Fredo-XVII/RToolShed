@@ -46,6 +46,7 @@ usethis::use_r("diff_vars")
 usethis::use_r("sql_helper_functions")
 usethis::use_r("hql_helper_functions")
 usethis::use_r("pgCreateTempTable")
+usethis::use_r("Holiday_Data")
 
 # Add Packages
 

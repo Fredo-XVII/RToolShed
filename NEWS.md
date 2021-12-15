@@ -1,3 +1,10 @@
+# RToolShed 0.1.7
+
+* New functions:
+  - `holiday_data()`: builds holiday data from 2 dates in a dataframe.
+  - Supporting Functions: many new supporting functions for retail holidays and
+  Juneteenth.
+
 # RToolShed 0.1.6
 
 * Upgrade for R 4.0.5
