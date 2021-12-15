@@ -9,8 +9,9 @@
 #'
 #' @name holiday_data
 #'
-#' @note https://github.com/cran/timeDate/blob/master/R/holiday-Dates.R
-#' https://www.federalpay.org/holidays
+#' @note
+#' - https://github.com/cran/timeDate/blob/master/R/holiday-Dates.R
+#' - https://www.federalpay.org/holidays
 #'
 #' @return The paramater `out_df` gives the user 2 choices for output.  The
 #' default output a weeks dataframe with beginning week, ending week, a holiday

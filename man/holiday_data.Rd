@@ -59,8 +59,10 @@ Build Holiday Dataframe of holiday dates between 2 dates in the
 form of 'yyyy-mm-dd'.  Pass a dataframe with the column of dates.
 }
 \note{
-https://github.com/cran/timeDate/blob/master/R/holiday-Dates.R
-https://www.federalpay.org/holidays
+\itemize{
+\item https://github.com/cran/timeDate/blob/master/R/holiday-Dates.R
+\item https://www.federalpay.org/holidays
+}
 }
 \examples{
 \dontrun{

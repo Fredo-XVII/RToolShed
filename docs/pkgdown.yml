@@ -1,7 +1,8 @@
 pandoc: 2.7.1
-pkgdown: 1.4.1
+pkgdown: 2.0.0
 pkgdown_sha: ~
 articles:
   rm_db_name: rm_db_name.html
   to_postgres: to_postgres.html
+last_built: 2021-12-15T20:33Z
 
