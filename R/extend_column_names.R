@@ -3,7 +3,7 @@
 
 #' @export
 
-extend_column_names <- function(df, text = 'pre', join_cols = c(1), type = c('prefix','suffix')) {
+ext_col_names <- function(df, text = 'pre', join_cols = c(1), type = c('prefix','suffix')) {
   
   # Separate columns into left right
   df_col_names <- names(df) # All columns
@@ -18,5 +18,5 @@ extend_column_names <- function(df, text = 'pre', join_cols = c(1), type = c('pr
   }
   
   # combine left and right column name lists'
-  c(names(df[col_left]),col_right_ordered)
+  c(col_left,col_right_ordered)
 }
