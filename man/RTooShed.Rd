@@ -6,10 +6,7 @@
 \alias{RToolShed-package}
 \title{RToolShed: Tools for Data Analysis and Data Science}
 \description{
-There are times as a data analyst or a data scientist that we find ourselves writing
-    the same code over and over across projects.  The central idea of the R Tool Shed package is
-    to centralize the code to improve development and to standardize the functionality of the 
-    functions across projects.
+There are times as a data analyst or a data scientist that we find ourselves writing the same code over and over across projects. The central idea of the R Tool Shed package is to centralize the code to improve development and to standardize the functionality of the functions across projects.
 }
 \seealso{
 Useful links:
